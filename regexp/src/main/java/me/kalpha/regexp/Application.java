@@ -25,21 +25,22 @@ public class Application {
                 "FROM (SELECT DISTINCT Country FROM Tab9);\n" +
                 "\n" +
                 "select (select aa from tab10 b where b.aa = a.aa)\n" +
-                "from tab11 a;\n" +
+                "from tab11 a\n" +
                 "\n" +
                 "SELECT DISTINCT\n" +
                 "     titles.title\n" +
-                "FROM\n" +
-                "     tab_12  AS titles\n" +
-                "INNER JOIN\n" +
-                "     exp_relationships_13   AS rel\n" +
+                "FROM     tab_12  AS titles\n" +
+                "INNER JOIN     exp_relationships_13   AS rel\n" +
                 "       ON titles.entry_id = rel.rel_child_id\n" +
-                "INNER JOIN\n" +
-                "     tab_14    AS channel\n" +
+                "INNER JOIN     tab_14    AS channel\n" +
                 "       ON rel.rel_id = channel.field_id_202\n" +
-                "WHERE     channel.entry_id = 19971";
+                "WHERE     channel.entry_id = 19971;\n" +
+                "\n" +
+                "select * from tab15 order by aa;\n" +
+                "\n" +
+                "select * from tab16 group by aa;";
 
-        final String regex = "(?:from|join).*?(?:\\n|\\binner|\\bouter\\b|\\bself\\b|\\bcross\\b|\\bwhere\\b|\\bon\\b|[();])";
+        final String regex = "(?:from|join).*?(?:\\n|\\binner|\\bouter\\b|\\bself\\b|\\bcross\\b|\\bon\\b|[();]|\\bwhere\\b|\\border\\b|\\bgroup\\b)";
         final String sql = org.replace("\n"," ");
         final Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         final Matcher matcher = pattern.matcher(sql);

@@ -1,32 +1,13 @@
-import java.util.regex.Matcher;
+port java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-final String regex = "(?&named_group)[a-z ]+(?'named_group'[tb]oys)";
-final String string = "\n"
-	 + "/\n"
-	 + "(?&named_group)[a-z ]+(?'named_group'[tb]oys)\n"
-	 + "/\n"
-	 + "(?&named_group) recurses the subpattern named named_group\n"
-	 + "Match a single character present in the list below [a-z ]+\n"
-	 + "+ Quantifier — Matches between one and unlimited times, as many times as possible, giving back as needed (greedy)\n"
-	 + "a-z a single character in the range between a (index 97) and z (index 122) (case sensitive)\n"
-	 + "  matches the character   literally (case sensitive)\n"
-	 + "Named Capture Group named_group (?'named_group'[tb]oys)\n"
-	 + "Match a single character present in the list below [tb]\n"
-	 + "tb matches a single character in the list tb (case sensitive)\n"
-	 + "oys matches the characters oys literally (case sensitive)\n"
-	 + "Your regular expression does not match the subject string.\n"
-	 + "Try launching the debugger to find out why.\n"
-	 + "Search reference\n"
-	 + "(?&name)\n"
-	 + "Recursively matches the given named capture group. Python supports (?P=named_group), but 'named group' has to be previously defined.\n"
-	 + "/(?&named_group)[a-z ]+(?'named_group'[tb]oys)/\n"
-	 + "boys like toys.";
+final String regex = "a(?<foo>bc)";
+final String string = "abc ac acb aob a2b a42c A87d";
 
 final Pattern pattern = Pattern.compile(regex);
 final Matcher matcher = pattern.matcher(string);
 
-if (matcher.find()) {
+while (matcher.find()) {
     System.out.println("Full match: " + matcher.group(0));
     for (int i = 1; i <= matcher.groupCount(); i++) {
         System.out.println("Group " + i + ": " + matcher.group(i));

@@ -7,8 +7,7 @@ import java.util.stream.Stream;
 
 public class Application {
     public static void main(String[] args) {
-        final String regex = "(from|join)(?<from>).+?(?:\\n|inner|outer|self|cross|where|on|[();])";
-        final String sql = "select a.aa, b.bb\n" +
+        String org = "select a.aa, b.bb\n" +
                 "from tab1 a inner join tab2 on (a.aa = tab2.aa)\n" +
                 "where a.cc in (select cc from tab3 where 1=1);\n" +
                 "\n" +
@@ -26,8 +25,22 @@ public class Application {
                 "FROM (SELECT DISTINCT Country FROM Tab9);\n" +
                 "\n" +
                 "select (select aa from tab10 b where b.aa = a.aa)\n" +
-                "from tab11 a;";
+                "from tab11 a;\n" +
+                "\n" +
+                "SELECT DISTINCT\n" +
+                "     titles.title\n" +
+                "FROM\n" +
+                "     tab_12  AS titles\n" +
+                "INNER JOIN\n" +
+                "     exp_relationships_13   AS rel\n" +
+                "       ON titles.entry_id = rel.rel_child_id\n" +
+                "INNER JOIN\n" +
+                "     tab_14    AS channel\n" +
+                "       ON rel.rel_id = channel.field_id_202\n" +
+                "WHERE     channel.entry_id = 19971";
 
+        final String regex = "(?:from|join).*?(?:\\n|\\binner|\\bouter\\b|\\bself\\b|\\bcross\\b|\\bwhere\\b|\\bon\\b|[();])";
+        final String sql = org.replace("\n"," ");
         final Pattern pattern = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
         final Matcher matcher = pattern.matcher(sql);
 

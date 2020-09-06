@@ -42,13 +42,13 @@ public class Application {
         final Matcher matcher = pattern.matcher(sql);
 
         Stream stream = matcher.results().
-                map(t -> t.group()).
-                map(s -> s.split(",")).
-                flatMap(Arrays::stream).
-                map(s -> s.replaceAll("([fF][rR][oO][mM]|[jJ][oO][iI][nN]|\\(|\\)|;)", "")).
+                map(t -> t.group()).//full match
+                map(s -> s.split(",")).// 테이블 기준으로 줄 분리
+                flatMap(Arrays::stream).// 1줄에 테이블 1개만
+                map(s -> s.replaceAll("([fF][rR][oO][mM]|[jJ][oO][iI][nN]|\\(|\\)|;)", "")). //테이블명 앞쪽 문자 삭제
                 map(s -> s.trim()).
                 filter(s -> s.length() > 0).
-                map(s -> Arrays.asList(s.split(" +")).get(0));
+                map(s -> Arrays.asList(s.split(" +")).get(0));// 테이블명만 추출
         stream.forEach(System.out::println);
     }
 }

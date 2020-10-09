@@ -1,9 +1,9 @@
-package me.kalpha.ssh;
+package me.kalpha.ssh.exec;
 
 import com.jcraft.jsch.*;
 
-import java.io.File;
 import java.io.InputStreamReader;
+import java.util.Properties;
 
 public class Application {
     public static void main(String[] args) {
@@ -16,7 +16,6 @@ public class Application {
         System.out.println("==> Connecting to " + hostname);
         Session session = null;
         JSch jsch = new JSch();
-
         try {
 //            jsch.addIdentity(privateKeyPath);
             session = jsch.getSession(username, hostname, port);
@@ -25,7 +24,7 @@ public class Application {
             session.setPassword(password);
 
             // 세션과 관련된 정보를 설정한다.
-            java.util.Properties config = new java.util.Properties();
+            Properties config = new Properties();
             // 호스트 정보를 검사하지 않는다.
             config.put("StrictHostKeyChecking", "no");
             session.setConfig(config);
@@ -62,6 +61,5 @@ public class Application {
                 session.disconnect();
             }
         }
-
     }
 }

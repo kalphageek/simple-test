@@ -5,6 +5,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>regexp</module>
+        <module>streams</module>
+        <module>ssh</module>
     </modules>
     <parent>
 		<groupId>org.springframework.boot</groupId>

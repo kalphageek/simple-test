@@ -1,13 +1,28 @@
 package me.kalpha.stream;
 
-import java.lang.reflect.Array;
 import java.util.*;
+import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Application {
     public static void main(String[] args) {
-        useFlatMap();
-        createByArray();
+        createStringStream();
+    }
+
+    private static void createStringStream() {
+        System.out.println("\ncreateStringStream()");
+        String str = "Eric, Elena, Jhon";
+        Stream<String> stringStream =
+                Pattern.compile(",").splitAsStream(str).
+                map(v -> v.trim());
+        stringStream.forEach(System.out::println);
+    }
+
+    private static void createIntStream() {
+        System.out.println("\ncreateIntStream()");
+        IntStream intStream = IntStream.range(1, 11);
+        intStream.forEach(System.out::println);
     }
 
     private static void useFlatMap() {
@@ -29,9 +44,11 @@ public class Application {
         System.out.println("\ncreateByGenerate()");
         Random random = new Random(System.currentTimeMillis());
         List<Integer> list = new LinkedList<Integer>();
-        for (int i=0; i<100; i++) {
+        for (int i=0; i<10; i++) {
             list.add(random.nextInt(50));
         }
+        list.stream().map(n -> n%11)
+                .forEach(System.out::println);
     }
 
     private static void createByArray() {

@@ -1,10 +1,8 @@
-package me.kalpha.ssh.ftp;
+package me.kalpha.ssh.readfile;
 
 import com.jcraft.jsch.*;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Properties;
 
 public class Application {
@@ -42,8 +40,6 @@ public class Application {
             BufferedOutputStream buff = new BufferedOutputStream(outputStream);
             channel.cd("/home/jjd/");
             channel.get("hello.txt", buff);
-
-            channel.disconnect();
 
             System.out.println(outputStream.toString());
         } catch (Exception e) {

@@ -13,11 +13,7 @@ import org.springframework.context.event.EventListener;
 @SpringBootApplication
 public class SshApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootApplication.class, args);
-    }
-
-    @EventListener(ApplicationReadyEvent.class)
-    public void init() {
-        System.out.println("aaa");
+        SpringApplication app = new SpringApplication(SshApplication.class);
+        app.run(args);
     }
 }

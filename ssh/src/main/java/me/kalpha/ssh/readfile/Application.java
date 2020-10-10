@@ -22,8 +22,8 @@ public class Application {
             channel.connect();
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             BufferedOutputStream buff = new BufferedOutputStream(outputStream);
-            channel.cd(remotePath);
-            channel.get("hello.txt", buff);
+//            channel.cd(remotePath);
+            channel.get(remotePath+File.separator+"hello.txt", buff);
 
             System.out.println(outputStream.toString());
         } catch (Exception e) {

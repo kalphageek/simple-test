@@ -1,39 +1,22 @@
 package me.kalpha.ssh.exec;
 
 import com.jcraft.jsch.*;
+import me.kalpha.ssh.common.CommonBean;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.InputStreamReader;
 import java.util.Properties;
 
 public class Application {
     public static void main(String[] args) {
-        String username = "jjd";
-        String hostname = "api2.deogi";
-        int port = 22;
-        String password = "123qwe";
-//        String privateKeyPath = "C:\\Users\\kalph\\.ssh\\id_rsa";
-
-        System.out.println("==> Connecting to " + hostname);
         Session session = null;
-        JSch jsch = new JSch();
-        try {
-//            jsch.addIdentity(privateKeyPath);
-            session = jsch.getSession(username, hostname, port);
-
-//            session.setConfig("PreferredAuthentications", "publickey,keyboard-interactive,password");
-            session.setPassword(password);
-
-            // 세션과 관련된 정보를 설정한다.
-            Properties config = new Properties();
-            // 호스트 정보를 검사하지 않는다.
-            config.put("StrictHostKeyChecking", "no");
-            session.setConfig(config);
-        } catch (JSchException e) {
-            throw new RuntimeException("Failed to create Jsch Session object.", e);
-        }
-
         Channel channel = null;
+        String hostname = "api2.deogi";
+        String username = "jjd";
+        CommonBean commonBean = new CommonBean();
+
         try {
+            session = commonBean.getJschSession(hostname, username);
             session.connect();
 
             channel = session.openChannel("exec");  //채널접속

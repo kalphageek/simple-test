@@ -15,7 +15,7 @@ public class RemoteExec {
     @Autowired
     CommonBean commonBean;
 
-    public void execRemoteCommand() {
+    public void execCommand() {
         Logger log = LoggerFactory.getLogger(this.getClass());
 
         Session session = null;

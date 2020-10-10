@@ -10,14 +10,14 @@ import java.util.Properties;
 import java.util.Vector;
 
 @Service
-public class RemoteDirGet {
+public class RemoteSftp {
     @Autowired
     CommonBean commonBean;
 
     private final String CURRENT_DIR = ".";
     private final String PARENT_DIR = "..";
 
-    public void getRemoteDir() {
+    public void downloadDirectory() {
         Session session = null;
         ChannelSftp channel = null;
         String hostname = "api2.deogi";

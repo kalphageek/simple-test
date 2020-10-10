@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Vector;
 
 @Service
-public class RemoteReadTql {
+public class RemoteTql {
     @Autowired
     CommonBean commonBean;
     public final String CURRENT_PATH = ".";

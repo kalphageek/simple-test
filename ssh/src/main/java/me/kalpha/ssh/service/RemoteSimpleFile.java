@@ -9,11 +9,11 @@ import java.io.*;
 import java.util.Properties;
 
 @Service
-public class RemoteSimpleReadFile {
+public class RemoteSimpleFile {
     @Autowired
     CommonBean commonBean;
 
-    public void readSimpleFile() {
+    public void readFile() {
         Session session = null;
         ChannelSftp channel = null;
         String hostname = "api2.deogi";

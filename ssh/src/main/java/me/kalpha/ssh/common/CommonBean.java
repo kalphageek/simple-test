@@ -9,9 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Properties;
 
-@Configuration
+@Component
 public class CommonBean {
-    @Bean
     public Session getJschSession(String hostname, String username) throws JSchException {
         String privateKeyPath = "~/.ssh/id_rsa";
         int port = 22;

@@ -1,25 +1,30 @@
-package me.kalpha.ssh.readfile2;
+package me.kalpha.ssh.service;
 
-import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelSftp;
 import com.jcraft.jsch.Session;
 import com.jcraft.jsch.SftpException;
 import me.kalpha.ssh.common.CommonBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.io.*;
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-public class Application {
-    private static final String CURRENT_PATH = ".";
-    private static final String PARENT_PATH = "..";
+@Service
+public class RemoteReadTql {
+    @Autowired
+    CommonBean commonBean;
+    public final String CURRENT_PATH = ".";
+    public final String PARENT_PATH = "..";
 
-    public static void main(String[] args) {
+    public void readRemoteTql() {
         String username = "jjd";
         String hostname = "api2.deogi";
         String tqlDirectory = "/home/jjd/tql";
-        CommonBean commonBean = new CommonBean();
         Session session = null;
         ChannelSftp channel = null;
 
@@ -52,7 +57,7 @@ public class Application {
         }
     }
 
-    private static List<String> findTql(ChannelSftp channelSftp, String remotePath) throws SftpException {
+    private List<String> findTql(ChannelSftp channelSftp, String remotePath) throws SftpException {
         List<String> tqlList = new ArrayList<>();
         Vector<ChannelSftp.LsEntry> childs = channelSftp.ls(remotePath);
         for (ChannelSftp.LsEntry child : childs) {

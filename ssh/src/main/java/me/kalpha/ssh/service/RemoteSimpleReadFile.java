@@ -1,19 +1,24 @@
-package me.kalpha.ssh.readfile;
+package me.kalpha.ssh.service;
 
 import com.jcraft.jsch.*;
 import me.kalpha.ssh.common.CommonBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.*;
 import java.util.Properties;
 
-public class Application {
-    public static void main(String[] args) {
+@Service
+public class RemoteSimpleReadFile {
+    @Autowired
+    CommonBean commonBean;
+
+    public void readSimpleFile() {
         Session session = null;
         ChannelSftp channel = null;
         String hostname = "api2.deogi";
         String username = "jjd";
         String remotePath = "/home/jjd";
-        CommonBean commonBean = new CommonBean();
 
         try {
             session = commonBean.getJschSession(hostname, username);

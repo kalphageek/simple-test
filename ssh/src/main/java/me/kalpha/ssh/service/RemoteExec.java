@@ -1,19 +1,27 @@
-package me.kalpha.ssh.exec;
+package me.kalpha.ssh.service;
 
 import com.jcraft.jsch.*;
 import me.kalpha.ssh.common.CommonBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.InputStreamReader;
 import java.util.Properties;
 
-public class Application {
-    public static void main(String[] args) {
+@Service
+public class RemoteExec {
+    @Autowired
+    CommonBean commonBean;
+
+    public void execRemoteCommand() {
+        Logger log = LoggerFactory.getLogger(this.getClass());
+
         Session session = null;
         Channel channel = null;
         String hostname = "api2.deogi";
         String username = "jjd";
-        CommonBean commonBean = new CommonBean();
 
         try {
             session = commonBean.getJschSession(hostname, username);

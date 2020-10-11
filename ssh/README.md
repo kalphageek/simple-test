@@ -5,4 +5,5 @@
 4. RemoteTql : ssh 의 sftp를 이용해 사전선택된 원격디렉토리 하위의 파일목록을 만들고, 해당 파일들을 OutputStream으로 읽는다.
 
 ## 기타
-appName = simple-test/ssh --> sh에서 디렉토리 구분자로 인식됨
+* Jenkins 파라미터
+> appName = simple-test/ssh --> sh에서 디렉토리 구분자로 인식됨

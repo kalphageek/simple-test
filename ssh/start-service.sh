@@ -4,7 +4,7 @@
 appName=$1
 
 TODAY=$(date +%Y%m%d%H%M)
-ORIGIN_JAR=$(readlink -f workspace/simple-test/${appName}/target/application.jar)
+ORIGIN_JAR=$(readlink -f workspace/${appName}/target/application.jar)
 echo "> TODAY : $TODAY"
 echo "> ORIGIN_JAR : $ORIGIN_JAR"
 

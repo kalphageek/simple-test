@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,10 +18,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BuilderApplicationTest {
     private List<Payment> payments;
+    private Integer[] aa = {1,2,3,4,5};
+
 
     @BeforeEach
     public void setup() {
+        Arrays.stream(aa).map(i -> Payment.builder()
+                .build());
         //given
+        payments =
         //ownerId + payDate + calculateCode 의 Hashcode로 Map의 유일성 검증 -> 처음 3개는 동일
         payments = Arrays.asList(
                 Payment.builder()

@@ -38,12 +38,13 @@ public class SampleController {
         File tqlDir = new File(dir);
         tqlDir.mkdirs();
 
-        // Templete 결과 저장 Plain Text 파일
+        // Templete 결과 Generate
         Context context = new Context();
         context.setVariable("name", name);
         String helloHtml = templateEngine.process("hello.html", context);
         String helloText = br2nl(helloHtml);
 
+        // Templete 결과 저장 Plain Text 파일
         String tqlPath = /*System.getProperty("user.home") + */ dir + File.separator + "hello-" + name + ".tql";
         File tqlFile = new File(tqlPath);
         Writer tqlWriter = new FileWriter(tqlFile);

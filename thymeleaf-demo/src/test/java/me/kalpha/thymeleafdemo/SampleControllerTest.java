@@ -18,7 +18,8 @@ class SampleControllerTest {
 
     @Test
     public void hello() throws Exception {
-        mockMvc.perform(get("/hello?name=jjd"))
+        mockMvc.perform(get("/hello?name=jjd")
+                    .characterEncoding("UTF-8"))
                 .andExpect(status().isOk())
                 .andDo(print())
                 .andExpect(view().name("hello"))

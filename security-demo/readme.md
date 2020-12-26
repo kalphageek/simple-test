@@ -22,7 +22,3 @@
 ```
 2. Class 파일
     > @WithMockMvc를 Class 또는 Method 레벨에 적용하면 가상의 계정을 만들어서 Test에 적용해준다.
-
-## Spring Security 적용 
-1. "Spring Security 적용(자동 설정), Test 적용" 과 동일하게 적용
-2. 

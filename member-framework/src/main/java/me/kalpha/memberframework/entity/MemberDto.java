@@ -6,6 +6,9 @@ import lombok.Setter;
 import javax.persistence.Column;
 import java.time.LocalDateTime;
 
+/**
+ * Web UI에서 사용자 입력정보를 받아서 Repository에 Member객체로 전달하기위한 DTO
+ */
 @Getter @Setter
 public class MemberDto {
 

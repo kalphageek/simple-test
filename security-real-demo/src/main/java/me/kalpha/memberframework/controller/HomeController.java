@@ -47,7 +47,7 @@ public class HomeController {
      * {@link me.kalpha.memberframework.config.SecurityConfig}에 "@EnableGlobalMethodSecurity(prePostEnabled = true)"가 있어야 @PreAuthorize가 동작한다
      * @return
      */
-    @PreAuthorize("hasRole('ROLE_MEMBER')")
+    @PreAuthorize("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
     @GetMapping("/member/info")
     public String userInfoView() {
         return "pages/user_info";

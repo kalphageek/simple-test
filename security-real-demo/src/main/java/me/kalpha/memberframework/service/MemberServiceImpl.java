@@ -16,7 +16,9 @@ import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -41,10 +43,11 @@ public class MemberServiceImpl implements MemberService{
         Optional<Member> optionalMember = memberRepository.findByAccount(account);
         Member member = optionalMember.orElseThrow(() -> new UsernameNotFoundException(account));
 
-        return new User(member.getAccount(), member.getPassword(), authrities());
+        return new User(member.getAccount(), member.getPassword(), authrities(member.getRole()));
     }
 
-    private Collection<? extends GrantedAuthority> authrities() {
-        return Arrays.asList(new SimpleGrantedAuthority("ROLE_MEMBER"));
+    private Collection<? extends GrantedAuthority> authrities(Member.Role role) {
+        return Arrays.asList(new SimpleGrantedAuthority(role.name()));
     }
+
 }

@@ -28,9 +28,9 @@ public class Payment {
         CREDIT_CARD("카드"),
         CASH("현금");
 
-        private String text;
-        Method(String text) {
-            this.text = text;
+        private String text1;
+        Method(String text1) {
+            this.text1 = text1;
         }
     }
 }

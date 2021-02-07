@@ -1,0 +1,27 @@
+spring:
+  jpa:
+#    hibernate.ddl-auto: create
+    show-sql: true
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#    properties:
+#      hibernate.format_sql: true
+app:
+  datasource:
+    catalog:
+      password: pgadmin
+      username: pgadmin
+      url: jdbc:postgresql://db.deogi:5432/catalog
+      driverClassName: org.postgresql.Driver
+    batch:
+      password: pgadmin
+      username: pgadmin
+      url: jdbc:postgresql://db.deogi:5432/postgres
+      driverClassName: org.postgresql.Driver
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type.descriptor.sql.BasicBinder: TRACE
+query:
+  samples-count: 15

@@ -51,7 +51,7 @@ public class BatchDataSourceConfig {
 
     @Bean(name = "batchEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean batchEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-        hibernateProperties.setDdlAuto("create");
+        hibernateProperties.setDdlAuto("none");
         jpaProperties.setDatabasePlatform("org.hibernate.dialect.PostgreSQLDialect");
         var properties = hibernateProperties.determineHibernateProperties(
                 jpaProperties.getProperties(), new HibernateSettings());

@@ -2,3 +2,6 @@ Properties에 의해 Kafka configuration 설정하고, MultiplicationSolvedEvent
 <br>
 <br>
 Kafka Consumer는 kafka-consumer Project에서 참조바랍니다.
+
+### Kafka Tool
+* https://www.kafkatool.com/download.html

@@ -33,7 +33,7 @@ public class MultiplicationProducerService {
 
             @Override
             public void onSuccess(SendResult<String, MultiplicationSolvedEvent> result) {
-                log.info("Sent message=[[]] with offset=[{}]", multiplicationSolvedEvent, result.getRecordMetadata().offset());
+                log.info("Sent message=[{}] with offset=[{}]", multiplicationSolvedEvent, result.getRecordMetadata().offset());
             }
         });
     }

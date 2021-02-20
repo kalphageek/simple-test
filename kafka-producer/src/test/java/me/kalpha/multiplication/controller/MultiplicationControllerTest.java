@@ -28,7 +28,7 @@ class MultiplicationControllerTest {
 
     @Test
     public void publish() throws Exception {
-        MultiplicationSolvedEvent event = new MultiplicationSolvedEvent(101L, 33L, true);
+        MultiplicationSolvedEvent event = new MultiplicationSolvedEvent(201L, 33L, true);
 
         mockMvc.perform(post("/multiplication")
                     .contentType(MediaType.APPLICATION_JSON)

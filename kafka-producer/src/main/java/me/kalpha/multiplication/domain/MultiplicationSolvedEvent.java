@@ -1,4 +1,4 @@
-package me.kalpha.multiplication.kafka.event;
+package me.kalpha.multiplication.domain;
 
 import lombok.*;
 

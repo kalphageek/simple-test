@@ -1,7 +1,7 @@
 package me.kalpha.multiplication.application.runner;
 
-import me.kalpha.multiplication.kafka.event.MultiplicationSolvedEvent;
-import me.kalpha.multiplication.kafka.producer.KafkaProducer;
+import me.kalpha.multiplication.domain.MultiplicationSolvedEvent;
+import me.kalpha.multiplication.service.MultiplicationProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProducerRunner implements ApplicationRunner {
     @Autowired
-    KafkaProducer producer;
+    MultiplicationProducerService producer;
 
     @Override
     public void run(ApplicationArguments args) throws Exception {

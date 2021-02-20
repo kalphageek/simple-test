@@ -5,6 +5,8 @@ spring:
     consumer:
       key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      # ConsumerFactory uses
+      group-id: test-consumer-group
       properties:
         # Delegate deserializers
         spring.deserializer.key.delegate.class: org.apache.kafka.common.serialization.StringDeserializer
@@ -18,4 +20,3 @@ spring:
 app:
   topic:
     name: event.multiplication
-  group-id: test-consumer-group

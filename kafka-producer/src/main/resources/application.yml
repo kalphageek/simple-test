@@ -12,4 +12,3 @@ spring:
 app:
   topic:
     name: event.multiplication
-  group-id: test-producer-group

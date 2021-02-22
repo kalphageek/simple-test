@@ -1,6 +1,6 @@
 package me.kalpha.multiplication.config;
 
-import me.kalpha.multiplication.domain.MultiplicationSolvedEvent;
+import me.kalpha.multiplication.entity.MultiplicationSolvedEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;

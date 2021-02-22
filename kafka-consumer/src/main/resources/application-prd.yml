@@ -24,6 +24,22 @@ spring:
         #"sasl.mechanism": "GSSAPI"
         #"sasl.kerberos.service.name": "<kerberos service name>"
         #"sasl.jaas.config": "com.sun.security.auth.module.Krb5LoginModule required useKeyTab=true storeKey=true keyTab=\"<keytab file path>\" principal=\"<principal>\";"
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+app:
+  datasource:
+    catalog:
+      password: pgadmin
+      username: pgadmin
+      url: jdbc:postgresql://db.deogi:5432/catalog
+      driverClassName: org.postgresql.Driver
+    ehub:
+      password: pgadmin
+      username: pgadmin
+      url: jdbc:postgresql://db.deogi:5432/postgres
+      driverClassName: org.postgresql.Driver
 logging:
   level:
     org.apache.kafka: WARN

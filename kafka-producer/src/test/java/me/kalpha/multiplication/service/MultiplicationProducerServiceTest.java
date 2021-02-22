@@ -1,13 +1,9 @@
 package me.kalpha.multiplication.service;
 
-import me.kalpha.multiplication.domain.MultiplicationSolvedEvent;
+import me.kalpha.multiplication.entity.MultiplicationSolvedEvent;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Random;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class MultiplicationProducerServiceTest {

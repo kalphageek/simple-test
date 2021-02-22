@@ -1,6 +1,6 @@
 package me.kalpha.multiplication.controller;
 
-import me.kalpha.multiplication.domain.MultiplicationSolvedEvent;
+import me.kalpha.multiplication.entity.MultiplicationSolvedEvent;
 import me.kalpha.multiplication.service.MultiplicationProducerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

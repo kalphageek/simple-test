@@ -19,7 +19,9 @@ spring:
         "spring.json.trusted.packages": "*"
         "enable.auto.commit": false
         "fetch.min.bytes": 65536 #64KB, Default 1
-        #"max-poll-records": 1000 #한번에 가져오는 record 갯수.
+        "max.poll.records": 500 # for batch - 한번에 가져오는 record 갯수.
+        "fetch.min.size": 1MB # for batch - 1MB 채워지기전에는 fetch하지 않도록, default:1byte
+        "fetch.max.wait": 5s # for batch - block time, default:500ms
         #"security.protocol": "SASL_PLAINTEXT"
         #"sasl.mechanism": "GSSAPI"
         #"sasl.kerberos.service.name": "<kerberos service name>"

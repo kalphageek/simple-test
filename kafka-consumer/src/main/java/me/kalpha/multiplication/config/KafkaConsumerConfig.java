@@ -12,7 +12,7 @@ import org.springframework.kafka.listener.ContainerProperties;
 @Configuration
 @EnableKafka
 public class KafkaConsumerConfig {
-    @Bean
+    @Bean("kafkaListenerContainerFactory")
     KafkaListenerContainerFactory<?> kafkaListenerContainerFactory(ConsumerFactory<String, MultiplicationSolvedEvent> consumerFactory) {
         var factory = new ConcurrentKafkaListenerContainerFactory<String, MultiplicationSolvedEvent>();
         factory.setConcurrency(2);
@@ -21,14 +21,16 @@ public class KafkaConsumerConfig {
         return factory;
     }
 
-    @Bean(name = "batchKafkaListenerContainerFactory")
+    @Bean("batchKafkaListenerContainerFactory")
     KafkaListenerContainerFactory<?> batchKafkaListenerContainerFactory (ConsumerFactory<String, MultiplicationSolvedEvent> consumerFactory) {
         var factory = new ConcurrentKafkaListenerContainerFactory<String, MultiplicationSolvedEvent>();
         factory.setConsumerFactory(consumerFactory);
         factory.setBatchListener(true);
-        var containerProperties = factory.getContainerProperties();
 
+        var containerProperties = factory.getContainerProperties();
         containerProperties.setAckMode(ContainerProperties.AckMode.BATCH);
+        containerProperties.setIdleBetweenPolls(5000);
+
         return factory;
     }
 }

@@ -31,21 +31,21 @@ public class MultiplicationConsumerService {
      * @param consumerFactory
      */
     @Autowired
-    public MultiplicationConsumerService(@Qualifier("batchKafkaListenerContainerFactory") ConsumerFactory consumerFactory, MuliplicationRepository muliplicationRepository) {
+    public MultiplicationConsumerService(ConsumerFactory consumerFactory, MuliplicationRepository muliplicationRepository) {
         this.consumerFactory = consumerFactory;
         this.muliplicationRepository = muliplicationRepository;
         consumer = new KafkaConsumer<String, MultiplicationSolvedEvent>(consumerFactory.getConfigurationProperties());
         random =  new Random(System.currentTimeMillis());
     }
 
-    @KafkaListener(topics = "${app.topic.name}", groupId = "${spring.kafka.consumer.group-id}")
-    public void consume(@Payload MultiplicationSolvedEvent multiplicationSolvedEvent) {
-        log.info(String.format("$$$$ => Consumed message : %s", multiplicationSolvedEvent));
-        saveMultiplication(multiplicationSolvedEvent);
-        consumer.commitSync();
-    }
+//    @KafkaListener(topics = "${app.topic.name}", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "kafkaListenerContainerFactory")
+//    public void consume(@Payload MultiplicationSolvedEvent multiplicationSolvedEvent) {
+//        log.info(String.format("$$$$ => Consumed message : %s", multiplicationSolvedEvent));
+//        saveMultiplication(multiplicationSolvedEvent);
+//        consumer.commitSync();
+//    }
 
-    @KafkaListener(topics = "${app.topic.name}", groupId = "${spring.kafka.consumer.group-id}")
+    @KafkaListener(topics = "${app.topic.name}", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "batchKafkaListenerContainerFactory")
     public Integer onMessage(ConsumerRecords<String, MultiplicationSolvedEvent> consumerRecords) {
         StreamSupport.stream(consumerRecords.spliterator(), false)
                 .map(ConsumerRecord::value)

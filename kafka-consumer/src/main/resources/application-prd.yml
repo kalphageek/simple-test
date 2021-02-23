@@ -14,14 +14,13 @@ spring:
         #"sasl.jaas.config": "com.sun.security.auth.module.Krb5LoginModule required useKeyTab=true storeKey=true keyTab=\"<keytab file path>\" principal=\"<principal>\";"
     consumer:
       bootstrap-servers: broker.deogi:9092
-      auto-offset-reset: latest #earliest #Test for, Default latest #offset에 오류가 있는 경우 처리방법. latest: 이전 거 무시
+      auto-offset-reset: earliest #earliest #Test for, Default latest #offset에 오류가 있는 경우 처리방법. latest: 이전 거 무시
       properties:
         "spring.json.trusted.packages": "*"
         "enable.auto.commit": false
         "fetch.min.bytes": 65536 #64KB, Default 1
         "max.poll.records": 500 # for batch - 한번에 가져오는 record 갯수.
-        "fetch.min.size": 1MB # for batch - 1MB 채워지기전에는 fetch하지 않도록, default:1byte
-        "fetch.max.wait": 5s # for batch - block time, default:500ms
+        "fetch.max.wait.ms": 5000 # for batch - 5s block time, default:500ms
         #"security.protocol": "SASL_PLAINTEXT"
         #"sasl.mechanism": "GSSAPI"
         #"sasl.kerberos.service.name": "<kerberos service name>"
@@ -30,18 +29,24 @@ spring:
     show-sql: true
     properties:
       hibernate.format_sql: true
+
+  configuration:
+    hikari:
+      minimum-idle: 2
 app:
   datasource:
     catalog:
       password: pgadmin
       username: pgadmin
       url: jdbc:postgresql://db.deogi:5432/catalog
-      driverClassName: org.postgresql.Driver
+      driver-class-name: org.postgresql.Driver
     ehub:
       password: pgadmin
       username: pgadmin
       url: jdbc:postgresql://db.deogi:5432/postgres
-      driverClassName: org.postgresql.Driver
+      driver-class-name: org.postgresql.Driver
+      maximum-pool-size: 2
+         # 오류예방 -> jpa org.postgresql.util.PSQLException: FATAL: sorry, too many clients already
 logging:
   level:
     org.apache.kafka: WARN

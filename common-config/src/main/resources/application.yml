@@ -1,3 +1,4 @@
 app:
   config:
-    message: Hello
+    message: Hello Auto Config
+    chicken-size: 10MB

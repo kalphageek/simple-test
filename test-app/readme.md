@@ -39,7 +39,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 <dependency>
    <groupId>me.kalpha</groupId>
    <artifactId>common-config</artifactId>
-   <version>0.0.1-SNAPSHOT</version>
+   <version>0.0.2-SNAPSHOT</version>
 </dependency>
 ```   
 2. Codes

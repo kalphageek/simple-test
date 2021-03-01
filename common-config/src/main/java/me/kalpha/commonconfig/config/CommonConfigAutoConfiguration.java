@@ -9,7 +9,6 @@ public class CommonConfigAutoConfiguration {
     @ConditionalOnMissingBean
     @Bean
     public CommonConfig commonConfig() {
-        CommonConfig commonConfig = new CommonConfig();
-        return commonConfig;
+        return new CommonConfig();
     }
 }

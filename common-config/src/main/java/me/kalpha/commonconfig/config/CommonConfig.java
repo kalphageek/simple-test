@@ -1,11 +1,10 @@
 package me.kalpha.commonconfig.config;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.util.unit.DataSize;
 
-@Setter @Getter
+@Getter @Setter
 @ConfigurationProperties(prefix = "app.config")
 public class CommonConfig {
     private String message;

@@ -2,6 +2,10 @@
 1. CommonConfig.java
 ```text
 @ConfigurationProperties @Getter @Setter # application.yml 파일 자동읽기 POJO
+@ConfigurationProperties 만으로는 Bean으로 등록 안됩
+    1. Application.java
+    @ConfigurationPropertiesScan
+        @ConfigurationProperties 를 찾아서 Bean으로 자동 등록할 뿐아니라 (@Component와 동일) IntelliJ에서는 application.properties의 자동완성도 지원하게 해준다.
 ```
 2. CommonConfigAutoConfiguration.java
 ```text   

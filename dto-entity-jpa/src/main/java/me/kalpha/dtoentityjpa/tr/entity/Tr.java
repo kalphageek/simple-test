@@ -20,7 +20,7 @@ public class TrEntity implements Serializable {
     private Set<TrMaterialCodeEntity> trCodeSet = new HashSet<>();
 
     public void addTrCode(final TrMaterialCodeEntity trCode) {
-        trCodeSet.add(trCode);
         trCode.setTr(this);
+        trCodeSet.add(trCode);
     }
 }

@@ -1,0 +1,21 @@
+spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+app:
+  datasource:
+    primary:
+      password: pgadmin
+      username: pgadmin
+      url: jdbc:postgresql://db.deogi:5432/catalog
+      driverClassName: org.postgresql.Driver
+    tr:
+      password: pgadmin
+      username: pgadmin
+      url: jdbc:postgresql://db.deogi:5432/postgres
+      driverClassName: org.postgresql.Driver
+logging.level:
+    org.hibernate:
+      SQL: debug
+      type: trace

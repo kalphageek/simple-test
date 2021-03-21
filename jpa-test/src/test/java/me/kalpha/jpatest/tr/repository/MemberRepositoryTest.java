@@ -2,6 +2,7 @@ package me.kalpha.jpatest.tr.repository;
 
 import me.kalpha.jpatest.common.BaseControllerTest;
 import me.kalpha.jpatest.tr.entity.Member;
+import me.kalpha.jpatest.tr.entity.MemberDto;
 import me.kalpha.jpatest.tr.entity.Team;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,14 @@ public class MemberRepositoryTest extends BaseControllerTest {
     MemberRepository memberRepository;
     @Autowired
     TeamRepository teamRepository;
+
+    @Test
+    public void findMemberDto() {
+        List<MemberDto> memberDtoList = memberRepository.findMemberDto();
+        memberDtoList.stream().forEach(System.out::println);
+
+        assertTrue(memberDtoList.size() > 0);
+    }
 
     @Test
     public void findByUsernameLike() {

@@ -2,6 +2,7 @@ package me.kalpha.jpatest.tr.repository;
 
 import me.kalpha.jpatest.config.Constants;
 import me.kalpha.jpatest.tr.entity.Member;
+import me.kalpha.jpatest.tr.entity.MemberDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -20,4 +21,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Query(value = "select m.username from Member m where m.username like :value")
     List<String> findByUsernameLike(@Param("value") String value);
+
+    @Query("select new me.kalpha.jpatest.tr.entity.MemberDto(m.id, m.username, t.name) from Member m join m.team t")
+    List<MemberDto> findMemberDto();
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +20,17 @@ public class MemberRepositoryTest extends BaseControllerTest {
     MemberRepository memberRepository;
     @Autowired
     TeamRepository teamRepository;
+
+    @Test
+    public void findByUsernames() {
+        List list = new ArrayList();
+        list.add("memberB");
+        list.add("memberC");
+        List<Member> memberList = memberRepository.findByUsernames(list);
+
+        memberList.stream().forEach(System.out::println);
+        assertTrue(memberList.size() >= 2);
+    }
 
     @Test
     public void findMemberDto() {

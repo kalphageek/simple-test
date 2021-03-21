@@ -17,6 +17,18 @@ public class MemberRepositoryTest extends BaseControllerTest {
     TeamRepository teamRepository;
 
     @Test
+    public void namedQueryTest() {
+        Team team = new Team("TeamC");
+        teamRepository.save(team);
+
+        Member member = new Member("memberC", 10, team);
+        Member member1 = memberRepository.save(member);
+
+        List<Member> memberList = memberRepository.findByTeamId(team.getId());
+        assertTrue(memberList.size() > 0);
+    }
+
+    @Test
     public void testMember() {
         Team team = new Team("TeamB");
         teamRepository.save(team);

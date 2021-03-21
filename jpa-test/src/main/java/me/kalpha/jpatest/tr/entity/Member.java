@@ -10,6 +10,10 @@ import javax.persistence.*;
 @EqualsAndHashCode(of = {"id"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @ToString(of = {"id","username","age"})
+@NamedQuery(
+        name = "Member.findByTeamId",
+        query = "select m from Member m where m.team.id = :teamId"
+)
 public class Member {
     @Id @GeneratedValue
     @Column(name = "member_id")

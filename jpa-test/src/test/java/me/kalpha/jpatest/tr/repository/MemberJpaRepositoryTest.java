@@ -6,6 +6,7 @@ import me.kalpha.jpatest.tr.entity.Team;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Commit;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * 동일한 Txn에서 PersistenceContext는 전달된 개체와 저장된 개체가 같음을 보장한다 *
  */
 @Transactional
-@Rollback(false)
+@Rollback(value = false)
 class MemberJpaRepositoryTest extends BaseControllerTest {
     @Autowired
     MemberJpaRepository memberJpaRepository;

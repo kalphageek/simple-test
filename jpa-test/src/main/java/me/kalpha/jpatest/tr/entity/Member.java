@@ -22,7 +22,7 @@ public class Member {
     private int age;
 
     // FetchType.LAZY가 없으면 불필요한 Join발생 가능
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne//(fetch = FetchType.LAZY)
     @JoinColumn(name = "team_id")
     private Team team;
 

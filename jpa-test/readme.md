@@ -11,3 +11,7 @@
     - DB파일이 생성된 이후에는 "jdbc:h2:tcp://localhost/~/test" 로 접속
    
 
+## namedQuery
+1. Entity에 Query 작성
+2. App로딩 시점에 오류를 발견할 수는 장점이 있다.
+

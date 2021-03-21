@@ -5,8 +5,11 @@ import me.kalpha.jpatest.tr.entity.Member;
 import me.kalpha.jpatest.tr.entity.Team;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Commit;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,12 +20,33 @@ public class MemberRepositoryTest extends BaseControllerTest {
     TeamRepository teamRepository;
 
     @Test
-    public void namedQueryTest() {
+    public void findByUsernameLike() {
+        List<String> memberList = memberRepository.findByUsernameLike("%B");
+        memberList.stream().forEach(System.out::println);
+
+        assertTrue(memberList.size() > 0);
+    }
+
+    @Test
+    public void findByTeamName() {
+// 에러발생 원인 못찾음
+//        Optional<Team> optionalTeam = teamRepository.findById(84L);
+//        Team team = optionalTeam.get();
+//
+//        Member member = new Member("memberD", 12, team);
+//        memberRepository.save(member);
+
+        List<Member> memberList = memberRepository.findByTeamName("TeamB");
+        assertTrue(memberList.size() > 0);
+    }
+
+    @Test
+    public void findByTeamId() {
         Team team = new Team("TeamC");
         teamRepository.save(team);
 
         Member member = new Member("memberC", 10, team);
-        Member member1 = memberRepository.save(member);
+        memberRepository.save(member);
 
         List<Member> memberList = memberRepository.findByTeamId(team.getId());
         assertTrue(memberList.size() > 0);

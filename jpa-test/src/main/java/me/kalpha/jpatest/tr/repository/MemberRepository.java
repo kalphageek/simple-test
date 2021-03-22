@@ -2,11 +2,15 @@ package me.kalpha.jpatest.tr.repository;
 
 import me.kalpha.jpatest.tr.entity.Member;
 import me.kalpha.jpatest.tr.entity.MemberDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 //    @Query(name = "Member.findByTeamId") //없어도 됨, NamedQuery에 있는지 메소드명으로 먼저 검색
@@ -23,4 +27,7 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     @Query("select m from Member m where m.username in :usernames")
     List<Member> findByUsernames(@Param("usernames") List<String> usernames);
+
+    Page<Member> findByIdGreaterThan(Long id, Pageable pageable);
+    Slice<Member> findSliceByIdGreaterThan(Long id, Pageable pageable);
 }

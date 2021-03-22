@@ -6,11 +6,16 @@ import me.kalpha.jpatest.tr.entity.MemberDto;
 import me.kalpha.jpatest.tr.entity.Team;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -20,6 +25,38 @@ public class MemberRepositoryTest extends BaseControllerTest {
     MemberRepository memberRepository;
     @Autowired
     TeamRepository teamRepository;
+
+    @Test
+    public void findSliceByIdGreaterThan() {
+        Long id = 10L;
+        PageRequest pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "id"));
+        Slice<Member> page = memberRepository.findSliceByIdGreaterThan(id, pageRequest);
+        List<Member> cotent = page.getContent();
+        cotent.stream().forEach(System.out::println);
+
+        assertTrue(cotent.size() == 3);
+//        assertTrue(page.getTotalElements() > 5);
+        assertTrue(page.getNumber() == 0);
+//        assertTrue(page.getTotalPages() >= 2);
+        assertTrue(page.isFirst() == true);
+        assertTrue(page.hasNext() == true);
+    }
+
+    @Test
+    public void findByIdGreaterThan() {
+        Long id = 10L;
+        PageRequest pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "id"));
+        Page<Member> page = memberRepository.findByIdGreaterThan(id, pageRequest);
+        List<Member> cotent = page.getContent();
+        cotent.stream().forEach(System.out::println);
+
+        assertTrue(cotent.size() == 3);
+        assertTrue(page.getTotalElements() > 5);
+        assertTrue(page.getNumber() == 0);
+        assertTrue(page.getTotalPages() >= 2);
+        assertTrue(page.isFirst() == true);
+        assertTrue(page.hasNext() == true);
+    }
 
     @Test
     public void findByUsernames() {

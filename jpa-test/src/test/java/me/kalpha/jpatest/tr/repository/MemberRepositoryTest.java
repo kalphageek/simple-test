@@ -51,6 +51,20 @@ public class MemberRepositoryTest extends BaseControllerTest {
         assertTrue(page.hasNext() == true);
     }
 
+    /**
+     * Page를 Dto로 변환하기
+     */
+    @Test
+    public void findDtoByIdGreaterThan() {
+        Long id = 10L;
+        PageRequest pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "id"));
+        Page<Member> page = memberRepository.findByIdGreaterThan(id, pageRequest);
+        Page<MemberDto> toMap = page.map(m -> new MemberDto(m.getId(), m.getUsername(), m.getTeam().getName()));
+
+        List<MemberDto> cotent = toMap.getContent();
+        cotent.stream().forEach(System.out::println);
+    }
+
     @Test
     public void findByIdGreaterThan() {
         Long id = 10L;

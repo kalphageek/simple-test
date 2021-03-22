@@ -26,6 +26,15 @@ public class MemberRepositoryTest extends BaseControllerTest {
     @Autowired
     TeamRepository teamRepository;
 
+
+    @Test
+    public void findListByIdGreaterThan() {
+        Long id = 10L;
+        PageRequest pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "id"));
+        List<Member> list = memberRepository.findListByIdGreaterThan(id, pageRequest);
+        list.stream().forEach(System.out::println);
+    }
+
     @Test
     public void findSliceByIdGreaterThan() {
         Long id = 10L;

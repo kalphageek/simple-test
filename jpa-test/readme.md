@@ -19,3 +19,4 @@
 1. Page는 totalElements를 통해 전체 레코드 카운트를 Query한다.
 2. Slice는 '더보기'를 위해 Page Count + 1 을 통해 '더보기'할 내용이 있는지만 확인한다. -> Page에 비해 성능에 유리하다.
 3. Page와 Slice의 사용법은 동일하며 Return Type만 변경하면 된다.
+4. Page 사용시 성능개선을 위해 Count Query를 임의로 지정할 수 있다. 예) -> @Query(countQuery = "select count(m.id) from Member m from id > :id")

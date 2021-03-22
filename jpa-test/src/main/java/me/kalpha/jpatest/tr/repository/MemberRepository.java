@@ -28,6 +28,16 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("select m from Member m where m.username in :usernames")
     List<Member> findByUsernames(@Param("usernames") List<String> usernames);
 
-    Page<Member> findByIdGreaterThan(Long id, Pageable pageable);
+    /**
+     * 성능개선을 위해 Count Query를 임의로 지정할 수 있다.
+     * @param id
+     * @param pageable
+     * @return
+     */
+    @Query(countQuery = "select count(m.id) from Member m where m.id > :id")
+    Page<Member> findByIdGreaterThan(@Param("id") Long id, Pageable pageable);
+
     Slice<Member> findSliceByIdGreaterThan(Long id, Pageable pageable);
+
+    List<Member> findListByIdGreaterThan(Long id, Pageable pageable);
 }

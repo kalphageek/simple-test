@@ -5,12 +5,14 @@ import me.kalpha.jpatest.tr.entity.MemberDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 //    @Query(name = "Member.findByTeamId") //없어도 됨, NamedQuery에 있는지 메소드명으로 먼저 검색
@@ -40,4 +42,36 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     Slice<Member> findSliceByIdGreaterThan(Long id, Pageable pageable);
 
     List<Member> findListByIdGreaterThan(Long id, Pageable pageable);
+
+    @Transactional
+    @Modifying(clearAutomatically = true) //executeUpdate 실행함. (flush를 자동으로)
+    @Query("update Member m set m.age = m.age + 1 where m.age > :age")
+    int bulkAgePlus(@Param("age") int age);
+
+    /**
+     * Fetch Join
+     * fetch = FetchType.LAZY인 경우도 한번의 Query로 Member와 Team을 Join해서 데이터 Return 한다.
+     * @return
+     */
+    @Query("select m from Member m left join fetch m.team where age >= :age")
+    List<Member> findFetchJoin(@Param("age") int age);
+
+    /**
+     * fetch join
+     * findFetchJoin 과 동일하다
+     * @return
+     */
+    @EntityGraph(attributePaths = {"team"})
+    @Query("select m from Member m where age >= :age")
+    List<Member> findFetchJoin2(@Param("age") int age);
+
+    @Override
+    /**
+     * JPA가 제공해주는  메소드에 Fetch Join을 적용하기 위해 JPQL을 작성할 필요가 없도록 해준다
+     * team 개체에 대해 Fetch Join 해라.
+     * @return
+     */
+    @EntityGraph(attributePaths = {"team"})
+    List<Member> findAll();
+
 }

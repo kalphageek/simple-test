@@ -18,4 +18,4 @@ app:
 logging.level:
     org.hibernate:
       SQL: debug
-#      type: trace
+      type: trace

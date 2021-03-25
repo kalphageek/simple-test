@@ -9,7 +9,10 @@
     - DB파일이 없는 경우로, "jdbc:h2:~/test" 변경 입력 후 연결 <- 파일 생성되면서 직접 연결됨
       - 이는 파일에 직접 접근하는 방식으로 파일에 락이 걸려서 여러곳에서 접속을 못하는 문제가 있음
     - DB파일이 생성된 이후에는 "jdbc:h2:tcp://localhost/~/test" 로 접속
-   
+
+## find[]ByUsername
+1. []안에는 아무거나 들어가도 된다.
+  - findByUsername 과 findXyzByUsername 은 동일한 의미이다.
 
 ## namedQuery
 1. Entity에 Query 작성
@@ -21,3 +24,11 @@
 3. Page와 Slice의 사용법은 동일하며 Return Type만 변경하면 된다.
 4. Page 사용시 성능개선을 위해 Count Query를 임의로 지정할 수 있다. 예) -> @Query(countQuery = "select count(m.id) from Member m from id > :id")
 5. page.map(...)을 통해 Page를 Dto로 변환하기 가능하다.
+
+## Fetch Join
+1. fetch = FetchType.LAZY 로 설정된 경우 Join된 데이터는 실제 사용될때 Query가 나간다.
+  - 이런 경우 Loop를 도는 경우에 N + 1 Query가 발생하게 되는데 이를 방지하기 위해, LAZY무시하고 Join Query가 실행되게 된다.
+2. 사용법
+  - JPQL : @Query("select m from Member m left join fetch m.team")
+  - @EntityGraph(attributePaths = {"team"})
+  - @Query("select m from Member m") + @EntityGraph(attributePaths = {"team"})

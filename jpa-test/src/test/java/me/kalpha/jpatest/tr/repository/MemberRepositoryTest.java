@@ -10,22 +10,45 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.annotation.Commit;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@Transactional
+@Rollback
 public class MemberRepositoryTest extends BaseControllerTest {
+    //모두 같은 영속성 Context를 사용한다
     @Autowired
     MemberRepository memberRepository;
     @Autowired
     TeamRepository teamRepository;
 
+    @Test
+    public void findFetchJoin() {
+        List<Member> memberList = memberRepository.findFetchJoin(165);
+        for (Member member : memberList) {
+            System.out.println("member.getUsername() = " + member.getUsername());
+//            System.out.println("member.getTeam().getName() = " + member.getTeam()==null?null:member.getTeam().getName());
+        }
+    }
+
+    @Test
+    public void bulkAgePlus() {
+//        memberRepository.save(new Member("member1", 120));
+//        memberRepository.save(new Member("member2", 110));
+//        memberRepository.save(new Member("member3", 122));
+//        memberRepository.save(new Member("member4", 165));
+//        memberRepository.save(new Member("member5", 160));
+
+        int updateCount = memberRepository.bulkAgePlus(100);
+        System.out.println("updateCount = " + updateCount);
+
+        assertTrue(updateCount == 15);
+    }
 
     @Test
     public void findListByIdGreaterThan() {
@@ -59,7 +82,7 @@ public class MemberRepositoryTest extends BaseControllerTest {
         Long id = 10L;
         PageRequest pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "id"));
         Page<Member> page = memberRepository.findByIdGreaterThan(id, pageRequest);
-        Page<MemberDto> toMap = page.map(m -> new MemberDto(m.getId(), m.getUsername(), m.getTeam().getName()));
+        Page<MemberDto> toMap = page.map(m -> new MemberDto(m.getId(), m.getUsername(), m.getTeam()==null?null:m.getTeam().getName()));
 
         List<MemberDto> cotent = toMap.getContent();
         cotent.stream().forEach(System.out::println);

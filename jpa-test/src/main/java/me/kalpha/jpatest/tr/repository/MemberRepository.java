@@ -5,13 +5,11 @@ import me.kalpha.jpatest.tr.entity.MemberDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
-import org.springframework.data.jpa.repository.EntityGraph;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.QueryHint;
 import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
@@ -74,4 +72,13 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @EntityGraph(attributePaths = {"team"})
     List<Member> findAll();
 
+    /**
+     * JPA Hint를 사용한다. Query를 ReadOnly로 사용한다 : 성능상 이점이 있음, update 해도 반영 안됨
+     * @param username
+     * @return
+     */
+    @QueryHints(
+            @QueryHint(name = "org.hibernate.readOnly", value = "true")
+    )
+    List<Member> findReadOnlyByUsername(String username);
 }

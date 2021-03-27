@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
-@Getter
+@Getter @Setter
 @AllArgsConstructor
 @EqualsAndHashCode(of = {"id"})
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

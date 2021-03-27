@@ -32,3 +32,6 @@
   - JPQL : @Query("select m from Member m left join fetch m.team")
   - @EntityGraph(attributePaths = {"team"})
   - @Query("select m from Member m") + @EntityGraph(attributePaths = {"team"})
+
+## Query Hint
+1. 성능개선을 위해 Read Only로만 Query를 설정할 수 있다. 성능테스트 후에 사용해야 한다.

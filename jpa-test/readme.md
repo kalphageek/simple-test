@@ -35,3 +35,8 @@
 
 ## Query Hint
 1. 성능개선을 위해 Read Only로만 Query를 설정할 수 있다. 성능테스트 후에 사용해야 한다.
+
+## Custom Repository
+1. MemberCustomRepository Interface 생성
+2. MemberCustomRepositoryImpl Class 생성
+3. MemberRepository에 MemberCustomRepository Interface 상속

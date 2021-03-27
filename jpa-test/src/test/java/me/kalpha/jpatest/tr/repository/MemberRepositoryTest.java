@@ -27,6 +27,12 @@ public class MemberRepositoryTest extends BaseControllerTest {
     TeamRepository teamRepository;
 
     @Test
+    public void findCustomRepository() {
+        List<Member> byCustom = memberRepository.findByCustom();
+        System.out.println("byCustom.size() = " + byCustom.size());
+    }
+
+    @Test
     public void findReadOnlyByUsername() {
         List<Member> memberList = memberRepository.findReadOnlyByUsername("memberB");
         Member member = memberList.get(0);

@@ -10,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -25,6 +24,15 @@ public class MemberRepositoryTest extends BaseControllerTest {
     MemberRepository memberRepository;
     @Autowired
     TeamRepository teamRepository;
+
+    @Test
+    public void auditingTest() throws Exception {
+        Member member = memberRepository.save(new Member("member1", 99));
+        Thread.sleep(100);
+        member.setUsername("member3");
+
+        System.out.println("member = " + member);
+    }
 
     @Test
     public void findCustomRepository() {

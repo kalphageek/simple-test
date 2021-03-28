@@ -52,7 +52,7 @@ public class TrDataSourceConfig {
 
     @Bean(name = "trEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean batchEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-        hibernateProperties.setDdlAuto("none");
+        hibernateProperties.setDdlAuto("create");
         jpaProperties.setDatabasePlatform("org.hibernate.dialect.PostgreSQLDialect");
         var properties = hibernateProperties.determineHibernateProperties(
                 jpaProperties.getProperties(), new HibernateSettings());

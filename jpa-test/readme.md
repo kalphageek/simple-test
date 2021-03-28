@@ -40,3 +40,18 @@
 1. MemberCustomRepository Interface 생성
 2. MemberCustomRepositoryImpl Class 생성
 3. MemberRepository에 MemberCustomRepository Interface 상속
+
+## Auditing 
+1. BaseTimeEntity, BaseEntity 생성 
+  - @EntityListeners(AuditingEntityListener.class), @MappedSuperclass 를 Class에 적용한다.
+  - Main Class에 
+2. Main Class 변경
+  - @EnableJpaAuditing을 Class에 적용한다. 
+3. bean을 등록한다.
+  - Session으로 부터 User ID를 리턴하는 bean을 등록한다.
+    ```java
+        @Bean
+        public AuditorAware<String> auditorAware() {
+            return () -> Optional.of("jpa-test");
+        }
+    ```

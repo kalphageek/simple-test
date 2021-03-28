@@ -4,6 +4,10 @@ import lombok.*;
 
 import javax.persistence.*;
 
+/**
+ * createdDate, lastModifiedDate 만 사용하는 경우 {@link BaseTimeEntity}를 상속
+ * createdDate, lastModifiedDate, createdBy, lastModified By 모두 필요한 경우는 {@link BaseEntity}를 상속
+ */
 @Entity
 @Getter @Setter
 @AllArgsConstructor
@@ -14,7 +18,7 @@ import javax.persistence.*;
         name = "Member.findByTeamId",
         query = "select m from Member m where m.team.id = :teamId"
 )
-public class Member {
+public class Member extends BaseEntity{
     @Id @GeneratedValue
     @Column(name = "member_id")
     private Long id;

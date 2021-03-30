@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 /**
- * createdDate, lastModifiedDate 만 사용하는 경우 {@link BaseTimeEntity}를 상속
+ * createdDate, lastModifiedDate 만 사용하는 경우 {@link BaseEntity}를 상속
  * createdDate, lastModifiedDate, createdBy, lastModified By 모두 필요한 경우는 {@link BaseEntity}를 상속
  */
 @Entity

@@ -1,6 +1,7 @@
 package me.kalpha.jpatest.tr.entity;
 
 import lombok.Getter;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -16,10 +17,11 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @MappedSuperclass //DB컬럼을 상속할 수 있도록 한다.
-public class BaseTimeEntity {
+public class CreatedBaseEntity {
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createdData;
-    @LastModifiedDate
-    private LocalDateTime lastModifiedDate;
+    private LocalDateTime createdDate;
+    @CreatedBy
+    @Column(updatable = false)
+    private String createdBy;
 }

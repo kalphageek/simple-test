@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Transactional
+@Rollback
 public class MemberRepositoryTest extends BaseControllerTest {
     //모두 같은 영속성 Context를 사용한다
     @Autowired
@@ -217,5 +219,22 @@ public class MemberRepositoryTest extends BaseControllerTest {
 
         long detetedCount = memberRepository.count();
         assertTrue(count-2 == detetedCount);
+    }
+
+    private void generateDate() {
+        Team team1 = new Team("Team1");
+        Team team2 = new Team("Team2");
+        teamRepository.save(team1);
+        teamRepository.save(team2);
+
+        Member member1 = new Member("member1", 10, team1);
+        Member member2 = new Member("member2", 11, team1);
+        memberRepository.save(member1);
+        memberRepository.save(member2);
+
+        Member member3 = new Member("member3", 20, team2);
+        Member member4 = new Member("member4", 21, team2);
+        memberRepository.save(member3);
+        memberRepository.save(member4);
     }
 }

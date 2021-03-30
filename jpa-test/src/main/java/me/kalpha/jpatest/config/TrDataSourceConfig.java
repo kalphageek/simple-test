@@ -18,6 +18,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManagerFactory;
 import java.util.Properties;
 
 @Configuration
@@ -28,63 +29,45 @@ import java.util.Properties;
 )
 @EnableTransactionManagement
 public class TrDataSourceConfig {
-    private final JpaProperties jpaProperties;
-    private final HibernateProperties hibernateProperties;
-
-    @Autowired
-    public TrDataSourceConfig(JpaProperties jpaProperties, HibernateProperties hibernateProperties) {
-        this.jpaProperties = jpaProperties;
-        this.hibernateProperties = hibernateProperties;
-    }
-
     @Bean
-    @ConfigurationProperties("app.datasource.tr")
+    @ConfigurationProperties("spring.datasource.tr")
     public DataSourceProperties trDataSourceProperties() {
         return new DataSourceProperties();
     }
 
     @Bean
-    @ConfigurationProperties("app.datasource.tr.hikari")
+    @ConfigurationProperties("spring.datasource.tr.hikari")
     public HikariDataSource trDataSource() {
         return trDataSourceProperties().initializeDataSourceBuilder()
                 .type(HikariDataSource.class).build();
     }
 
     @Bean(name = "trEntityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean batchEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-        hibernateProperties.setDdlAuto("create");
-        jpaProperties.setDatabasePlatform("org.hibernate.dialect.PostgreSQLDialect");
-        var properties = hibernateProperties.determineHibernateProperties(
-                jpaProperties.getProperties(), new HibernateSettings());
-        return builder
-                .dataSource(trDataSource())
-                .properties(properties)
-                .persistenceUnit(Constants.TR_UNIT_NAME)
-                .packages("me.kalpha.jpatest.tr.entity")//entities
-                .build();
+    public LocalContainerEntityManagerFactoryBean trEntityManagerFactory(EntityManagerFactoryBuilder builder) {
+        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+        vendorAdapter.setDatabasePlatform("org.hibernate.dialect.PostgreSQLDialect");
+        vendorAdapter.setGenerateDdl(false);
+        vendorAdapter.setShowSql(true);
+
+        Properties properties = new Properties(); // Properties에 Hibernate Config 설정 추가
+        properties.setProperty("hibernate.format_sql", String.valueOf(true));
+        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+
+        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+        factory.setJpaVendorAdapter(vendorAdapter);
+        factory.setPersistenceUnitName(Constants.TR_UNIT_NAME); // EntitiManager 직접 사용을 위한 Name 설정
+        factory.setPackagesToScan("me.kalpha.jpatest.tr.entity");
+        factory.setDataSource(trDataSource());
+        factory.setJpaProperties(properties);
+
+        return factory;
     }
-//    public LocalContainerEntityManagerFactoryBean trEntityManagerFactory(EntityManagerFactoryBuilder builder) {
-//        HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-//        vendorAdapter.setDatabasePlatform("org.hibernate.dialect.PostgreSQLDialect");
-//        vendorAdapter.setGenerateDdl(false);
-//        vendorAdapter.setShowSql(true);
-//
-//        Properties properties = new Properties(); // Properties에 Hibernate Config 설정 추가
-//        properties.setProperty("hibernate.format_sql", String.valueOf(true));
-//        properties.setProperty("hibernate.hbm2ddl.auto", "create");
-//
-//        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-//        factory.setJpaVendorAdapter(vendorAdapter);
-//        factory.setPackagesToScan("me.kalpha.dtoentityjpa.tr.entity");
-//        factory.setDataSource(trDataSource());
-//        factory.setJpaProperties(properties);
-//
-//        return factory;
-//    }
 
     @Bean
     public PlatformTransactionManager trTransactionManager(
-            final @Qualifier("trEntityManagerFactory") LocalContainerEntityManagerFactoryBean trEntityManagerFactory) {
-        return new JpaTransactionManager(trEntityManagerFactory.getObject());
+            final @Qualifier("trEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
+        JpaTransactionManager txManager = new JpaTransactionManager();
+        txManager.setEntityManagerFactory(entityManagerFactory);
+        return txManager;
     }
 }

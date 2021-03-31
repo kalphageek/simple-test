@@ -15,7 +15,7 @@ import java.util.Optional;
 public class AuditConfiguration {
     @Bean
     AuditorAware<String> auditorAware() {
-        // Session으로 부터 User ID를 리턴한다.
+        // Session으로 부터 User ID를 파라미터로 넘긴다.
         return () -> Optional.of("jpa-test");
     }
 }

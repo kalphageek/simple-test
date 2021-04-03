@@ -106,7 +106,8 @@ public class MemberRepositoryTest extends BaseControllerTest {
         Long id = 10L;
         PageRequest pageRequest = PageRequest.of(0, 3, Sort.by(Sort.Direction.DESC, "id"));
         Page<Member> page = memberRepository.findByIdGreaterThan(id, pageRequest);
-        Page<MemberDto> toMap = page.map(m -> new MemberDto(m.getId(), m.getUsername(), m.getTeam()==null?null:m.getTeam().getName()));
+//        Page<MemberDto> toMap = page.map(m -> new MemberDto(m.getId(), m.getUsername(), m.getTeam()==null?null:m.getTeam().getName()));
+        Page<MemberDto> toMap = page.map(MemberDto::new);
 
         List<MemberDto> cotent = toMap.getContent();
         cotent.stream().forEach(System.out::println);

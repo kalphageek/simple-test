@@ -1,13 +1,13 @@
-package me.kalpha.dtoentityjpa;
+package me.kalpha.enumsample;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DtoEntityJpaApplication {
+public class EnumSampleApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DtoEntityJpaApplication.class, args);
+		SpringApplication.run(EnumSampleApplication.class, args);
 	}
 
 }

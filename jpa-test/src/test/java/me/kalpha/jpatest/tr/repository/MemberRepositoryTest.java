@@ -19,7 +19,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Transactional
-@Rollback
+//@Rollback
 public class MemberRepositoryTest extends BaseControllerTest {
     //모두 같은 영속성 Context를 사용한다
     @Autowired
@@ -50,6 +50,7 @@ public class MemberRepositoryTest extends BaseControllerTest {
 
         member.setUsername("memberB");
     }
+
 
     @Test
     public void findFetchJoin() {

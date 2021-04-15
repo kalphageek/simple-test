@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Eqp1TrDet extends CreatedBaseEntity {
-    @Id @Generated
+    @Id @GeneratedValue
     private Long id;
     private String col1;
     private Long col2;
@@ -22,6 +22,11 @@ public class Eqp1TrDet extends CreatedBaseEntity {
         this.col1 = col1;
         this.col2 = col2;
         assignEqp1Tr(eqp1Tr);
+    }
+
+    public Eqp1TrDet(String col1, Long col2) {
+        this.col1 = col1;
+        this.col2 = col2;
     }
 
     public void assignEqp1Tr(Eqp1Tr eqp1Tr) {

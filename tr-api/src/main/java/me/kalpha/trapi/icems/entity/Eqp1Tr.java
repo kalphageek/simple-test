@@ -17,6 +17,7 @@ import java.util.List;
 @Getter
 @Builder
 @EqualsAndHashCode(of = {"id"})
+@ToString
 public class Eqp1Tr extends CreatedBaseEntity {
     @Id @GeneratedValue
     private Long id;

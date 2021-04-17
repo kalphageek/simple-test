@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString
 public class Eqp1TrDet extends CreatedBaseEntity {
     @Id @GeneratedValue
     private Long id;

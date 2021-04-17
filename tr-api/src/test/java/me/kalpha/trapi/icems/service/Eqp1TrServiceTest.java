@@ -1,7 +1,8 @@
 package me.kalpha.trapi.icems.service;
 
 import me.kalpha.trapi.icems.entity.Eqp1Tr;
-import me.kalpha.trapi.icems.entity.Eqp1TrDet;
+import me.kalpha.trapi.icems.entity.Eqp1TrDetDto;
+import me.kalpha.trapi.icems.entity.Eqp1TrDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,21 +19,26 @@ class Eqp1TrServiceTest {
     Eqp1TrService eqp1TrService;
 
     @Test
-    public void findByName() {
+    public void createTr() {
         String trName = "lot1";
-        Eqp1Tr eqp1Tr = Eqp1Tr.builder()
+        Eqp1TrDto eqp1TrDto = generateEqp1TrDto(trName);
+
+        Eqp1Tr eqp1Tr = eqp1TrService.createTr(eqp1TrDto);
+
+        assertTrue(eqp1Tr.getEqp1TrDets().stream().count() == 2);
+    }
+
+    private Eqp1TrDto generateEqp1TrDto(String trName) {
+        Eqp1TrDto eqp1TrDto = Eqp1TrDto.builder()
                 .name(trName).value(123454l).eventTime(LocalDateTime.now())
                 .build();
-        Eqp1TrDet eqp1TrDet1 = Eqp1TrDet.builder()
-                .eqp1Tr(eqp1Tr).col1("col1").col2(837466l)
+        Eqp1TrDetDto eqp1TrDetDto1 = Eqp1TrDetDto.builder()
+                .eqp1TrDto(eqp1TrDto).col1("col1").col2(837466l)
                 .build();
-        Eqp1TrDet eqp1TrDet2 = Eqp1TrDet.builder()
-                .eqp1Tr(eqp1Tr).col1("col2").col2(44l)
+        Eqp1TrDetDto eqp1TrDetDto2 = Eqp1TrDetDto.builder()
+                .eqp1TrDto(eqp1TrDto).col1("col2").col2(66l)
                 .build();
 
-        Eqp1Tr savedEqp1Tr = eqp1TrService.saveTr(eqp1Tr);
-
-        assertTrue(savedEqp1Tr.getId().equals(eqp1Tr.getId()));
-        assertTrue(savedEqp1Tr.getEqp1TrDets().stream().count() == 2);
+        return eqp1TrDto;
     }
 }

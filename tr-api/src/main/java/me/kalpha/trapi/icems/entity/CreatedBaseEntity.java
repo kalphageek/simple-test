@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @MappedSuperclass //DB컬럼을 상속할 수 있도록 한다.
-public class CreatedBaseEntity {
+public class CreatedBaseEntity implements Serializable {
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdDate;

@@ -3,6 +3,8 @@ package me.kalpha.trapi.icems.controller;
 import me.kalpha.trapi.common.BaseControllerTest;
 import me.kalpha.trapi.icems.entity.Eqp1Tr;
 import me.kalpha.trapi.icems.entity.Eqp1TrDet;
+import me.kalpha.trapi.icems.entity.Eqp1TrDetDto;
+import me.kalpha.trapi.icems.entity.Eqp1TrDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,28 +20,31 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class Eqp1TrControllerTest extends BaseControllerTest {
 
     @Test
-    public void saveTr() throws Exception {
-        Eqp1Tr eqp1Tr = generateEqp1Tr("lot2");
+    public void createTr() throws Exception {
+        Eqp1TrDto eqp1TrDto = generateEqp1TrDto("lot2");
 
         mockMvc.perform(post("/icems/tr")
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(objectMapper.writeValueAsString(eqp1Tr)))
+                    .content(objectMapper.writeValueAsString(eqp1TrDto)))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
         ;
     }
 
-    private Eqp1Tr generateEqp1Tr(String trName) {
-        Eqp1Tr eqp1Tr = Eqp1Tr.builder()
+    private Eqp1TrDto generateEqp1TrDto(String trName) {
+        Eqp1TrDto eqp1TrDto = Eqp1TrDto.builder()
                 .name(trName).value(123454l).eventTime(LocalDateTime.now())
                 .build();
-        Eqp1TrDet eqp1TrDet1 = Eqp1TrDet.builder()
-                .eqp1Tr(eqp1Tr).col1("col1").col2(837466l)
+        Eqp1TrDetDto eqp1TrDetDto1 = Eqp1TrDetDto.builder()
+                .col1("col1").col2(837466l)
                 .build();
-        Eqp1TrDet eqp1TrDet2 = Eqp1TrDet.builder()
-                .eqp1Tr(eqp1Tr).col1("col2").col2(44l)
+        Eqp1TrDetDto eqp1TrDetDto2 = Eqp1TrDetDto.builder()
+                .col1("col2").col2(66l)
                 .build();
-        return eqp1Tr;
+        eqp1TrDto.getEqp1TrDetDtos().add(eqp1TrDetDto1);
+        eqp1TrDto.getEqp1TrDetDtos().add(eqp1TrDetDto2);
+
+        return eqp1TrDto;
     }
 }

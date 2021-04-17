@@ -17,6 +17,7 @@ public class Eqp1TrDet extends CreatedBaseEntity {
     @JoinColumn(name = "tr_id")
     private Eqp1Tr eqp1Tr;
 
+    @Builder
     public Eqp1TrDet(Eqp1Tr eqp1Tr, String col1, Long col2) {
         this.eqp1Tr = eqp1Tr;
         this.col1 = col1;

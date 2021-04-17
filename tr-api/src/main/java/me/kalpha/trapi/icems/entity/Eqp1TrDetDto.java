@@ -10,5 +10,8 @@ import lombok.Getter;
 public class Eqp1TrDetDto {
     private String col1;
     private Long col2;
-    private Eqp1TrDto eqp1TrDto;
+
+    public Eqp1TrDet toEntity(Eqp1Tr eqp1Tr) {
+        return new Eqp1TrDet(eqp1Tr, col1, col2);
+    }
 }

@@ -33,11 +33,13 @@ class Eqp1TrServiceTest {
                 .name(trName).value(123454l).eventTime(LocalDateTime.now())
                 .build();
         Eqp1TrDetDto eqp1TrDetDto1 = Eqp1TrDetDto.builder()
-                .eqp1TrDto(eqp1TrDto).col1("col1").col2(837466l)
+                .col1("col1").col2(837466l)
                 .build();
         Eqp1TrDetDto eqp1TrDetDto2 = Eqp1TrDetDto.builder()
-                .eqp1TrDto(eqp1TrDto).col1("col2").col2(66l)
+                .col1("col2").col2(66l)
                 .build();
+        eqp1TrDto.getEqp1TrDetDtos().add(eqp1TrDetDto1);
+        eqp1TrDto.getEqp1TrDetDtos().add(eqp1TrDetDto2);
 
         return eqp1TrDto;
     }

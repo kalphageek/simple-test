@@ -25,17 +25,12 @@ public class Eqp1Tr extends CreatedBaseEntity {
     private Long value;
     private LocalDateTime eventTime;
 
+    public List<Eqp1TrDet> getEqp1TrDets() {
+        if (eqp1TrDets == null)
+            eqp1TrDets = new ArrayList<>();
+        return eqp1TrDets;
+    }
+
     @OneToMany(mappedBy = "eqp1Tr")
     List<Eqp1TrDet> eqp1TrDets;
-
-    public Eqp1Tr(String name, Long value, LocalDateTime eventTime) {
-        this.name = name;
-        this.value = value;
-        this.eventTime = eventTime;
-    }
-
-    public void assignEqp1TrDet(Eqp1TrDet eqp1TrDet) {
-        if (eqp1TrDets == null) this.eqp1TrDets =  new ArrayList<>();
-        this.eqp1TrDets.add(eqp1TrDet);
-    }
 }

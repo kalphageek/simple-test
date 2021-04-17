@@ -24,11 +24,6 @@ public class Eqp1TrDet extends CreatedBaseEntity {
         assignEqp1Tr(eqp1Tr);
     }
 
-    public Eqp1TrDet(String col1, Long col2) {
-        this.col1 = col1;
-        this.col2 = col2;
-    }
-
     public void assignEqp1Tr(Eqp1Tr eqp1Tr) {
         this.eqp1Tr = eqp1Tr;
         this.eqp1Tr.getEqp1TrDets().add(this);

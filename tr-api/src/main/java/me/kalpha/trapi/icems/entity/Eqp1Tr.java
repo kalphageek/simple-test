@@ -15,12 +15,8 @@ import java.util.List;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Entity
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter @Setter
-@Builder
-@EqualsAndHashCode(of = {"id"})
-@ToString
 public class Eqp1Tr extends CreatedBaseEntity {
     @Id @GeneratedValue
     private Long id;

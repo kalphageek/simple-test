@@ -16,7 +16,6 @@ public class Eqp1TrDetDto {
         ModelMapper modelMapper = new ModelMapper();
         Eqp1TrDet eqp1TrDet = modelMapper.map(this, Eqp1TrDet.class);
         eqp1TrDet.assignEqp1Tr(eqp1Tr);
-
         return eqp1TrDet;
     }
 }

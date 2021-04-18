@@ -25,9 +25,10 @@ spring:
         #"sasl.jaas.config": "com.sun.security.auth.module.Krb5LoginModule required useKeyTab=true storeKey=true keyTab=\"<keytab file path>\" principal=\"<principal>\";"
     consumer:
       bootstrap-servers: broker.deogi:9092
-      auto-offset-reset: latest #earliest #Test for, Default latest #offset에 오류가 있는 경우 처리방법. latest: 이전 거 무시
+      auto-offset-reset: earliest #earliest #Test for, Default latest #offset에 오류가 있는 경우 처리방법. latest: 이전 거 무시
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: eqp1Tr
       properties:
         "spring.json.trusted.packages": "*"
         "enable.auto.commit": false

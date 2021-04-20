@@ -1,5 +1,3 @@
-server.port: 8081
-
 spring:
   profiles: prd
   jpa:
@@ -16,10 +14,10 @@ spring:
     #      hikari:
     #        maximum-pool-size: 5
     #        minimul-idle: 1
-    ehub:
+    trmart:
       password: pgadmin
       username: pgadmin
-      url: jdbc:postgresql://db.deogi:5432/postgres
+      url: jdbc:postgresql://db.deogi:5432/catalog
       driverClassName: org.postgresql.Driver
 #      hikari:
 #        initialization-fail-timeout: 1000000 # 서버가 가동시간을 기다리기 위해 설정
@@ -44,6 +42,7 @@ spring:
       auto-offset-reset: latest #earliest #Test for, Default latest #offset에 오류가 있는 경우 처리방법. latest: 이전 거 무시
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: tr-consumer-service
       properties:
         "spring.json.trusted.packages": "*"
         "enable.auto.commit": false

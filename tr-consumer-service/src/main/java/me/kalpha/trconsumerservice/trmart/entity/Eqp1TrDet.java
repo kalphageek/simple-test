@@ -1,4 +1,4 @@
-package me.kalpha.trapi.trmart.entity;
+package me.kalpha.trconsumerservice.trmart.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -6,15 +6,16 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import me.kalpha.trapi.common.CreatedBaseEntity;
+import me.kalpha.trconsumerservice.common.CreatedBaseEntity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Eqp1TrDet extends CreatedBaseEntity {
+public class Eqp1TrDet extends CreatedBaseEntity implements Serializable {
     @Id @GeneratedValue
     private Long id;
     private String col1;

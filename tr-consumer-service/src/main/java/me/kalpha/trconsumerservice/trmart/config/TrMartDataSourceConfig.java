@@ -1,7 +1,7 @@
-package me.kalpha.trapi.trmart.config;
+package me.kalpha.trconsumerservice.trmart.config;
 
 import com.zaxxer.hikari.HikariDataSource;
-import me.kalpha.trapi.common.Constants;
+import me.kalpha.trconsumerservice.common.Constants;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -22,7 +22,7 @@ import java.util.Properties;
 @EnableJpaRepositories(
         entityManagerFactoryRef = "trmartEntityManagerFactory",
         transactionManagerRef = "trmartTransactionManager",
-        basePackages = {"me.kalpha.trapi.trmart.repository"}//repositories
+        basePackages = {"me.kalpha.trconsumerservice.trmart.repository"}//repositories
 )
 @EnableTransactionManagement
 public class TrMartDataSourceConfig {
@@ -53,7 +53,7 @@ public class TrMartDataSourceConfig {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
         factory.setPersistenceUnitName(Constants.TRMART_UNIT_NAME); // EntitiManager 직접 사용을 위한 Name 설정
-        factory.setPackagesToScan("me.kalpha.trapi.trmart.entity");
+        factory.setPackagesToScan("me.kalpha.trconsumerservice.trmart.entity");
         factory.setDataSource(trmartDataSource());
         factory.setJpaProperties(properties);
 

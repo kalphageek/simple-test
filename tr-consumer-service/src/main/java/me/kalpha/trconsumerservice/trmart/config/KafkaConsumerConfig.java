@@ -1,7 +1,6 @@
-package me.kalpha.trapi.trmart.config;
+package me.kalpha.trconsumerservice.trmart.config;
 
-import me.kalpha.trapi.common.KafkaErrorHandler;
-import me.kalpha.trapi.trmart.entity.Eqp1Tr;
+import me.kalpha.trconsumerservice.trmart.entity.Eqp1Tr;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;

@@ -1,30 +1,14 @@
-server.port: 8081
-
 spring:
-  profiles: prd
-  jpa:
-    show-sql: true
-    properties:
-      hibernate.format_sql: true
   datasource:
-    primary:
-      password: pgadmin
-      username: pgadmin
-      url: jdbc:postgresql://db.deogi:5432/catalog
-      driverClassName: org.postgresql.Driver
-    #      platform: primary # 초기 데이터 입력을 위한 insert sql - /resources/data-primary.sql
-    #      hikari:
-    #        maximum-pool-size: 5
-    #        minimul-idle: 1
-    ehub:
-      password: pgadmin
-      username: pgadmin
-      url: jdbc:postgresql://db.deogi:5432/postgres
-      driverClassName: org.postgresql.Driver
-#      hikari:
-#        initialization-fail-timeout: 1000000 # 서버가 가동시간을 기다리기 위해 설정
-#        maximum-pool-size: 5
-#        minimul-idle: 1
+    hikari:
+#      username: sa
+#      password:
+#      url: jdbc:h2:mem:testdb
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:mem:testdb
+  jpa.properties:
+    hibernate.dialect: org.hibernate.dialect.H2Dialect
+#    ddl-auto: create
   kafka:
     producer:
       bootstrap-servers: broker.deogi:9092
@@ -41,9 +25,10 @@ spring:
         #"sasl.jaas.config": "com.sun.security.auth.module.Krb5LoginModule required useKeyTab=true storeKey=true keyTab=\"<keytab file path>\" principal=\"<principal>\";"
     consumer:
       bootstrap-servers: broker.deogi:9092
-      auto-offset-reset: latest #earliest #Test for, Default latest #offset에 오류가 있는 경우 처리방법. latest: 이전 거 무시
+      auto-offset-reset: earliest #earliest #Test for, Default latest #offset에 오류가 있는 경우 처리방법. latest: 이전 거 무시
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: tr-consumer-service
       properties:
         "spring.json.trusted.packages": "*"
         "enable.auto.commit": false
@@ -58,7 +43,9 @@ app:
   topic:
     name: eqp.tr.ic.eqp1
 
-logging.level:
-  org.hibernate:
-    SQL: debug
-    type: trace
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type.descriptor.sql.BasicBinder: TRACE

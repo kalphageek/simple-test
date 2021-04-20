@@ -1,4 +1,4 @@
-package me.kalpha.trapi.trmart.entity;
+package me.kalpha.trconsumerservice.trmart.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -7,12 +7,13 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import me.kalpha.trapi.common.CreatedBaseEntity;
+import me.kalpha.trconsumerservice.common.CreatedBaseEntity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter @Setter
-public class Eqp1Tr extends CreatedBaseEntity {
+public class Eqp1Tr extends CreatedBaseEntity implements Serializable {
     @Id @GeneratedValue
     private Long id;
 

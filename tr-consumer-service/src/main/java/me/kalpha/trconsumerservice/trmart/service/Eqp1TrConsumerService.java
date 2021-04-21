@@ -36,12 +36,11 @@ public class Eqp1TrConsumerService {
     }
 
     @KafkaListener(topics = "${app.topic.name}", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "batchKafkaListenerContainerFactory")
-    public Integer onMessage(ConsumerRecords<String, Eqp1Tr> consumerRecords) {
+    public void onMessage(ConsumerRecords<String, Eqp1Tr> consumerRecords) {
         StreamSupport.stream(consumerRecords.spliterator(), false)
                 .map(ConsumerRecord::value)
                 .filter(Objects::nonNull)
                 .forEach(eqp1TrService::createTr);
         log.info("consumed count: {}", consumerRecords.count());
-        return consumerRecords.count();
     }
 }

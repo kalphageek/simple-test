@@ -9,13 +9,12 @@ import lombok.Setter;
 import me.kalpha.trconsumerservice.common.CreatedBaseEntity;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Eqp1TrDet extends CreatedBaseEntity implements Serializable {
+public class Eqp1TrDet extends CreatedBaseEntity {
     @Id @GeneratedValue
     private Long id;
     private String col1;

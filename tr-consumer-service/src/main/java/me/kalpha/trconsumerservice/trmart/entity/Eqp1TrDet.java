@@ -2,10 +2,7 @@ package me.kalpha.trconsumerservice.trmart.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import me.kalpha.trconsumerservice.common.CreatedBaseEntity;
 
 import javax.persistence.*;
@@ -13,9 +10,9 @@ import javax.persistence.*;
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Entity
 @Getter @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Eqp1TrDet extends CreatedBaseEntity {
-    @Id @GeneratedValue
+    @Id //@GeneratedValue
     private Long id;
     private String col1;
     private Long col2;

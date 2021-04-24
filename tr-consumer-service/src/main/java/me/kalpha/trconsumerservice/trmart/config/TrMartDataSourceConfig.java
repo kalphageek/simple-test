@@ -48,7 +48,7 @@ public class TrMartDataSourceConfig {
 
         Properties properties = new Properties(); // Properties에 Hibernate Config 설정 추가
         properties.setProperty("hibernate.format_sql", String.valueOf(true));
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
+        properties.setProperty("hibernate.hbm2ddl.auto", "none");
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);

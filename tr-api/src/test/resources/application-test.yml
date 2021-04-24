@@ -16,7 +16,7 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         "enable.idempotence" : true
-        "max.request.size" : 10485760 #10MB, Default 1MB
+        "max.request.size" : 10485760 #10MB, Default   1MB
         "batch.size": 131072 #128KB, Default 12KB
         "linger.ms": 10 #10ms, Default 0
         #"security.protocol": "SASL_PLAINTEXT"

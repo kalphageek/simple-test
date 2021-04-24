@@ -1,4 +1,4 @@
-package me.kalpha.trapi.common;
+package me.kalpha.trconsumerservice.common;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -12,7 +12,7 @@ import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
 
-public class DataSourceConfig {
+public class DataSourceConfiguration {
     @SuppressWarnings("unchecked")
     protected static <T> T createDataSource(DataSourceProperties properties, Class<? extends DataSource> type) {
         return (T) properties.initializeDataSourceBuilder().type(type).build();

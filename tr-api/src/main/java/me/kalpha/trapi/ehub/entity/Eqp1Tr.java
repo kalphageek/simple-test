@@ -6,24 +6,22 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.*;
 import me.kalpha.trapi.common.CreatedBaseEntity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 @Entity
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Eqp1Tr extends CreatedBaseEntity {
     @Id @GeneratedValue
     private Long id;
 
     private String name;
     private Long value;
+    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime eventTime;
 
     public List<Eqp1TrDet> getEqp1TrDets() {

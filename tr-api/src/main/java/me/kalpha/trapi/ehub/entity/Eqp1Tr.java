@@ -21,7 +21,6 @@ public class Eqp1Tr extends CreatedBaseEntity {
 
     private String name;
     private Long value;
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime eventTime;
 
     public List<Eqp1TrDet> getEqp1TrDets() {
@@ -30,6 +29,6 @@ public class Eqp1Tr extends CreatedBaseEntity {
         return eqp1TrDets;
     }
 
-    @OneToMany(mappedBy = "eqp1Tr")
+    @OneToMany(mappedBy = "eqp1Tr", cascade = CascadeType.ALL)
     List<Eqp1TrDet> eqp1TrDets;
 }

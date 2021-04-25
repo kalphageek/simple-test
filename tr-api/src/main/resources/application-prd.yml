@@ -30,27 +30,13 @@ spring:
     bootstrap-servers: broker.deogi:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         "enable.idempotence" : true
         "max.request.size" : 10485760 #10MB, Default 1MB
         "batch.size": 131072 #128KB, Default 12KB
         "linger.ms": 10 #10ms, Default 0
-        #"security.protocol": "SASL_PLAINTEXT"
-        #"sasl.mechanism": "GSSAPI"
-        #"sasl.kerberos.service.name": "<kerberos service name>"
-        #"sasl.jaas.config": "com.sun.security.auth.module.Krb5LoginModule required useKeyTab=true storeKey=true keyTab=\"<keytab file path>\" principal=\"<principal>\";"
-    consumer:
-      auto-offset-reset: latest #earliest #Test for, Default latest #offset에 오류가 있는 경우 처리방법. latest: 이전 거 무시
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
-      properties:
-        "spring.json.trusted.packages": "*"
-        "enable.auto.commit": false
-        "fetch.min.bytes": 65536 #64KB, Default 1
-        #"max-poll-records": 1000 #한번에 가져오는 record 갯수.
         #"security.protocol": "SASL_PLAINTEXT"
         #"sasl.mechanism": "GSSAPI"
         #"sasl.kerberos.service.name": "<kerberos service name>"

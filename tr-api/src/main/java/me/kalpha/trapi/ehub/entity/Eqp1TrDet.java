@@ -17,7 +17,7 @@ public class Eqp1TrDet extends CreatedBaseEntity {
     private String col1;
     private Long col2;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "tr_id")
     private Eqp1Tr eqp1Tr;
 

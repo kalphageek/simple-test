@@ -8,23 +8,10 @@ spring:
       jdbc-url: jdbc:h2:mem:testdb
   jpa.properties:
     hibernate.dialect: org.hibernate.dialect.H2Dialect
-#    ddl-auto: create
+    ddl-auto: create
   kafka:
-    producer:
-      bootstrap-servers: broker.deogi:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-      properties:
-        "enable.idempotence" : true
-        "max.request.size" : 10485760 #10MB, Default 1MB
-        "batch.size": 131072 #128KB, Default 12KB
-        "linger.ms": 10 #10ms, Default 0
-        #"security.protocol": "SASL_PLAINTEXT"
-        #"sasl.mechanism": "GSSAPI"
-        #"sasl.kerberos.service.name": "<kerberos service name>"
-        #"sasl.jaas.config": "com.sun.security.auth.module.Krb5LoginModule required useKeyTab=true storeKey=true keyTab=\"<keytab file path>\" principal=\"<principal>\";"
+    bootstrap-servers: broker.deogi:9092
     consumer:
-      bootstrap-servers: broker.deogi:9092
       auto-offset-reset: earliest #earliest #Test for, Default latest #offset에 오류가 있는 경우 처리방법. latest: 이전 거 무시
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer

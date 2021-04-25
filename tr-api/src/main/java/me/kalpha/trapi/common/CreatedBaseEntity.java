@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 @Getter
 @MappedSuperclass //DB컬럼을 상속할 수 있도록 한다.
-public class CreatedBaseEntity implements Serializable {
+public class CreatedBaseEntity {
     @CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdDate;

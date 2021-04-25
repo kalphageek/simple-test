@@ -46,15 +46,15 @@ public class Eqp1TrService {
                 .map(o -> eqp1TrDetMapper.map(o, Eqp1TrDet.class))
                 .collect(Collectors.toList());
 
-        log.info("eqp1Tr : {} {} {}", eqp1Tr.getId(), eqp1Tr.getName(), eqp1Tr.getEqp1TrDets().size());
-        eqp1TrDets.forEach(o ->
-                log.info("eqp1TrDets : {} {} {}", o.getId(), o.getCol1(), o.getCol2())
-        );
-
         // Save at Eqp1Tr, Eqp1TrDet
         // CascadeType이 지정되어 있지 않기 때문에 따로 저장해야 한다.
         trRepository.save(eqp1Tr);
         trDetRepository.saveAll(eqp1TrDets);
+
+        log.info("eqp1Tr : {} {} {}", eqp1Tr.getId(), eqp1Tr.getName(), eqp1Tr.getEqp1TrDets().size());
+        eqp1TrDets.forEach(o ->
+                log.info("eqp1TrDets : {} {} {}", o.getId(), o.getCol1(), o.getCreatedDate())
+        );
 
         return eqp1Tr;
     }

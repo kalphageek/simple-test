@@ -34,6 +34,9 @@ public class Eqp1TrDet implements Persistable<Long> {
 
     @Override
     public boolean isNew() {
-        return createdDate == null;
+        if (createdDate == null) {
+            createdDate = LocalDateTime.now();
+            return true;
+        } else return false;
     }
 }

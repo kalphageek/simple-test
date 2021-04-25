@@ -46,11 +46,16 @@ public class Eqp1TrRepositoryTest {
         });
 
         String trName = "lot1";
-        Eqp1Tr eqp1TrDto = generateEqp1Tr(trName);
-        Eqp1Tr eqp1Tr = eqp1TrMapper.map(eqp1TrDto, Eqp1Tr.class);
-        List<Eqp1TrDet> eqp1TrDets = eqp1TrDto.getEqp1TrDets().stream()
+        Eqp1Tr receivedEqp1Tr = generateEqp1Tr(trName);
+        Eqp1Tr eqp1Tr = eqp1TrMapper.map(receivedEqp1Tr, Eqp1Tr.class);
+        List<Eqp1TrDet> eqp1TrDets = receivedEqp1Tr.getEqp1TrDets().stream()
                 .map(o -> eqp1TrDetMapper.map(o, Eqp1TrDet.class))
                 .collect(Collectors.toList());
+
+        log.info("eqp1Tr : {} {} {}", eqp1Tr.getId(), eqp1Tr.getName(), eqp1Tr.getEqp1TrDets().size());
+        eqp1TrDets.forEach(o ->
+                log.info("eqp1TrDets : {} {} {}", o.getId(), o.getCol1(), o.getCol2())
+        );
 
         // Save at Eqp1Tr, Eqp1TrDet
         trRepository.save(eqp1Tr);

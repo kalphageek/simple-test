@@ -1,20 +1,19 @@
 spring:
+  jpa:
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
   datasource:
-    hikari:
-#      username: sa
-#      password:
-#      url: jdbc:h2:mem:testdb
-      driver-class-name: org.h2.Driver
-      jdbc-url: jdbc:h2:mem:testdb
-  jpa.properties:
-    hibernate.dialect: org.hibernate.dialect.H2Dialect
-    ddl-auto: create
+    username: sa
+    password:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
   kafka:
     bootstrap-servers: broker.deogi:9092
     consumer:
       auto-offset-reset: earliest #earliest #Test for, Default latest #offset에 오류가 있는 경우 처리방법. latest: 이전 거 무시
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
       group-id: tr-consumer-service
       properties:
         "spring.json.trusted.packages": "*"

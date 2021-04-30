@@ -26,6 +26,7 @@ public class Eqp1TrService {
 //    ModelMapper eqp1TrDetMapper;
 
     @Transactional
+// ModelMapper사용 - 특정값 설정    
 //    public Eqp1Tr createTr(Eqp1Tr receivedEqp1Tr) {
 //        eqp1TrMapper.addMappings(new PropertyMap<Eqp1Tr, Eqp1Tr>() {
 //            @Override
@@ -54,12 +55,13 @@ public class Eqp1TrService {
         try {
             trRepository.save(eqp1Tr);
             trDetRepository.saveAll(eqp1TrDets);
-        } catch (DataIntegrityViolationException e) {
+        } catch (DataIntegrityViolationException e) { // 이전 offset에서 다시 시작하는 경우 (기존 데이터 존재)
             eqp1Tr.setCreatedDate(LocalDateTime.now());
             eqp1TrDets.forEach(o -> o.setCreatedDate(LocalDateTime.now()));
             trRepository.save(eqp1Tr);
             trDetRepository.saveAll(eqp1TrDets);
         } catch (Exception e) {
+            log.debug("{} : createTr({} ({}))", this.getClass(), eqp1Tr, eqp1Tr.getEqp1TrDets().size());
             throw e;
         }
 

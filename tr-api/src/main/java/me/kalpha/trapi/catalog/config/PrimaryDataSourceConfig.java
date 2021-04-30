@@ -47,12 +47,11 @@ public class PrimaryDataSourceConfig {
     public LocalContainerEntityManagerFactoryBean primaryEntityManagerFactory(EntityManagerFactoryBuilder builder) {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setDatabasePlatform("org.hibernate.dialect.PostgreSQLDialect");
-        vendorAdapter.setGenerateDdl(false);
+        vendorAdapter.setGenerateDdl(true);
         vendorAdapter.setShowSql(true);
 
         Properties properties = new Properties(); // Properties에 Hibernate Config 설정 추가
         properties.setProperty("hibernate.format_sql", String.valueOf(true));
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);

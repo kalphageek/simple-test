@@ -5,7 +5,9 @@ import me.kalpha.trapi.ehub.entity.Eqp1TrDetDto;
 import me.kalpha.trapi.ehub.entity.Eqp1TrDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.ActiveProfiles;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -13,9 +15,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-//@ActiveProfiles("test")
+@ActiveProfiles("test")
 public class Eqp1TrControllerTest extends BaseControllerTest {
 
+    @Transactional
     @Test
     public void createTr() throws Exception {
         Eqp1TrDto eqp1TrDto = generateEqp1TrDto("lot2");

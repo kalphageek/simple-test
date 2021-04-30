@@ -1,5 +1,6 @@
 package me.kalpha.trapi.ehub.service;
 
+import lombok.extern.slf4j.Slf4j;
 import me.kalpha.trapi.ehub.entity.Eqp1Tr;
 import me.kalpha.trapi.ehub.entity.Eqp1TrDet;
 import me.kalpha.trapi.ehub.entity.Eqp1TrDto;
@@ -13,6 +14,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class Eqp1TrService {
     @Autowired
@@ -34,6 +36,7 @@ public class Eqp1TrService {
         // Save at Eqp1Tr, Eqp1TrDet
         // CascadeType.ALL로 지정되어 있지 않기 때문에 따로 저장할 필요가 없다. 영속성 전파됨
         trRepository.save(eqp1Tr);
+        log.info("eqq1Tr : {}({})", eqp1Tr, eqp1TrDets.size());
 
         // Publish to app.topic.name Topic
         trProducerService.sendMessage(eqp1Tr);

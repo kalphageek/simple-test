@@ -35,16 +35,16 @@ public class Eqp1TrProducerService {
         Message<Eqp1Tr> message = MessageBuilder.withPayload(eqp1Tr)
                 .setHeader(KafkaHeaders.TOPIC, topic)
                 .build();
-        ListenableFuture<SendResult<String, Eqp1Tr>> future = eqp1TrKafkaTemplate.send(topic, eqp1Tr);
+        ListenableFuture<SendResult<String, Eqp1Tr>> future = eqp1TrKafkaTemplate.send(message);
         future.addCallback(new ListenableFutureCallback<SendResult<String, Eqp1Tr>>() {
             @Override
             public void onFailure(Throwable ex) {
-                log.info("Unable to send message=[{}] due to : [{}]", eqp1Tr, ex.getMessage());
+                log.info("Unable to send message=[{}({})] due to : [{}]", eqp1Tr, eqp1Tr.getEqp1TrDets().size(), ex.getMessage());
             }
 
             @Override
             public void onSuccess(SendResult<String, Eqp1Tr> result) {
-                log.info("Sent message=[{}] with offset=[{}]", eqp1Tr, result.getRecordMetadata().offset());
+                log.info("Sent message=[{}({})] with offset=[{}]", eqp1Tr, eqp1Tr.getEqp1TrDets().size(), result.getRecordMetadata().offset());
             }
         });
     }

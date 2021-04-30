@@ -3,15 +3,11 @@ server:
 
 spring:
   profiles: prd
-  jpa:
-    show-sql: true
-    properties:
-      hibernate.format_sql: true
   datasource:
     primary:
       password: pgadmin
       username: pgadmin
-      url: jdbc:postgresql://db.deogi:5432/catalog
+      url: jdbc:postgresql://db.deogi:5432/postgres
       driverClassName: org.postgresql.Driver
     #      platform: primary # 초기 데이터 입력을 위한 insert sql - /resources/data-primary.sql
     #      hikari:
@@ -30,8 +26,7 @@ spring:
     bootstrap-servers: broker.deogi:9092
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-#      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
       properties:
         "enable.idempotence" : true
         "max.request.size" : 10485760 #10MB, Default 1MB

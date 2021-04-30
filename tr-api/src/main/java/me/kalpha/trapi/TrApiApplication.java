@@ -12,8 +12,8 @@ public class TrApiApplication {
 		SpringApplication.run(TrApiApplication.class, args);
 	}
 
-//	@Bean
-//	public ByteArrayJsonMessageConverter messageConverter() {
-//		return new ByteArrayJsonMessageConverter();
-//	}
+	@Bean
+	public ByteArrayJsonMessageConverter messageConverter() {
+		return new ByteArrayJsonMessageConverter();
+	}
 }

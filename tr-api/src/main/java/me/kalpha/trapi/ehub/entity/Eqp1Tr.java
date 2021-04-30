@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 @Getter @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@ToString(of = {"id","name","value","eventTime"})
 public class Eqp1Tr extends CreatedBaseEntity {
     @Id @GeneratedValue
     private Long id;

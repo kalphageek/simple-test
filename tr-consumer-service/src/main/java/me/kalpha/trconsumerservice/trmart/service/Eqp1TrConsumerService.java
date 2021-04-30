@@ -18,21 +18,6 @@ import org.springframework.stereotype.Service;
 public class Eqp1TrConsumerService {
     @Autowired
     Eqp1TrService eqp1TrService;
-//    private final ConsumerFactory consumerFactory;
-//    private final Eqp1TrService eqp1TrService;
-//    private KafkaConsumer<String, Eqp1Tr> consumer;
-//
-//    /**
-//     * application.yml에 의해 설정된 properties에 의해 자동생성된 ConsumerFactory를 주입받아
-//     * KafkaConsumer를 singleton으로 생성. Manually commitSync 수행
-//     * @param consumerFactory
-//     */
-//    @Autowired
-//    public Eqp1TrConsumerService(ConsumerFactory consumerFactory, Eqp1TrService eqp1TrService) {
-//        this.consumerFactory = consumerFactory;
-//        this.eqp1TrService = eqp1TrService;
-//        consumer = new KafkaConsumer<String, Eqp1Tr>(consumerFactory.getConfigurationProperties());
-//    }
 
     @KafkaListener(topics = "${app.topic.name}", groupId = "${spring.kafka.consumer.group-id}")
     public void receiveMessage(@Payload Eqp1Tr eqp1Tr,

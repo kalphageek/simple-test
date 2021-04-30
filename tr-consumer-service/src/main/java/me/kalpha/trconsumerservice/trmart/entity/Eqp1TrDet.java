@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @Entity
 @Getter @Setter
 @NoArgsConstructor
+@ToString(of = {"id","col1","col2"})
 public class Eqp1TrDet implements Persistable<Long> {
     @Id
     private Long id;

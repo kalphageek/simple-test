@@ -12,13 +12,13 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@Transactional
 @SpringBootTest
 @ActiveProfiles("test")
 class Eqp1TrServiceTest {
     @Autowired
     Eqp1TrService eqp1TrService;
 
+    @Transactional
     @Test
     public void createTr() {
         String trName = "lot1";

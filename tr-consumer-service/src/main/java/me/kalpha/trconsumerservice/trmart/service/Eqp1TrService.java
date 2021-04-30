@@ -6,9 +6,11 @@ import me.kalpha.trconsumerservice.trmart.entity.Eqp1TrDet;
 import me.kalpha.trconsumerservice.trmart.repository.Eqp1TrDetRepository;
 import me.kalpha.trconsumerservice.trmart.repository.Eqp1TrRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Slf4j
@@ -49,12 +51,21 @@ public class Eqp1TrService {
         eqp1TrDets.forEach(o -> o.setCreatedDate(null));
         // Save at Eqp1Tr, Eqp1TrDet
         // CascadeType이 지정되어 있지 않기 때문에 따로 저장해야 한다.
-        trRepository.save(eqp1Tr);
-        trDetRepository.saveAll(eqp1TrDets);
+        try {
+            trRepository.save(eqp1Tr);
+            trDetRepository.saveAll(eqp1TrDets);
+        } catch (DataIntegrityViolationException e) {
+            eqp1Tr.setCreatedDate(LocalDateTime.now());
+            eqp1TrDets.forEach(o -> o.setCreatedDate(LocalDateTime.now()));
+            trRepository.save(eqp1Tr);
+            trDetRepository.saveAll(eqp1TrDets);
+        } catch (Exception e) {
+            throw e;
+        }
 
-        log.info("eqp1Tr : {} {} {}", eqp1Tr.getId(), eqp1Tr.getName(), eqp1Tr.getEqp1TrDets().size());
+        log.info("eqp1Tr : {} ({})", eqp1Tr, eqp1Tr.getEqp1TrDets().size());
         eqp1TrDets.forEach(o ->
-                log.info("eqp1TrDets : {} {} {}", o.getId(), o.getCol1(), o.getCreatedDate())
+                log.info("eqp1TrDets : {}", o)
         );
 
         return eqp1Tr;

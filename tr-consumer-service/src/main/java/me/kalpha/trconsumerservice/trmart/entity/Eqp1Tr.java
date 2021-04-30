@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 @Getter @Setter
+@ToString(of = {"id","name","value","eventTime"})
 public class Eqp1Tr implements Persistable<Long> {
     @Id
     private Long id;

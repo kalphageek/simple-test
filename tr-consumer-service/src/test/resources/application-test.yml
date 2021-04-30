@@ -1,8 +1,4 @@
 spring:
-  jpa:
-    show-sql: true
-    properties:
-      hibernate.format_sql: true
   datasource:
     username: sa
     password:
@@ -11,7 +7,7 @@ spring:
   kafka:
     bootstrap-servers: broker.deogi:9092
     consumer:
-      auto-offset-reset: earliest #earliest #Test for, Default latest #offset에 오류가 있는 경우 처리방법. latest: 이전 거 무시
+      auto-offset-reset: earliest #latest #Test for, Default latest #offset에 오류가 있는 경우 처리방법. latest: 이전 거 무시
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
       group-id: tr-consumer-service

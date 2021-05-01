@@ -12,6 +12,8 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 @Slf4j
 @RequiredArgsConstructor
@@ -25,6 +27,7 @@ public class Eqp1TrConsumerService {
                                @Header(KafkaHeaders.RECEIVED_PARTITION_ID) Integer partition,
                                @Header(KafkaHeaders.OFFSET) Long offset) {
         log.info("Received message: data = {}, topic = {}, partition = {}, offset = {}", eqp1Tr, topic, partition, offset);
+
         eqp1TrService.createTr(eqp1Tr);
     }
 //    @KafkaListener(topics = "${app.topic.name}", groupId = "${spring.kafka.consumer.group-id}", containerFactory = "eqp1TrKafkaListenerContainerFactory")

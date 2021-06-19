@@ -27,16 +27,21 @@ class QueryServiceTest {
         String t1Name = "Table1";
         TableEntity t1 = new TableEntity(t1Name);
         TableEntity t2 = new TableEntity("Table2");
-//        tableRepository.save(t1);
-//        tableRepository.save(t2);
+        TableEntity t3 = new TableEntity("Table3");
 
         QueryEntity queryEntity = new QueryEntity("select * from Table1, Table2");
         queryEntity.workWith(t1);
         queryEntity.workWith(t2);
         queryRepository.save(queryEntity);
 
+        QueryEntity queryEntity2 = new QueryEntity("select * from Table1, Table3");
+        queryEntity2.workWith(t1);
+        queryEntity2.workWith(t3);
+        queryRepository.save(queryEntity2);
+
         Optional<TableEntity> optionalt1 = tableRepository.findById(t1Name);
-        TableEntity t3 = optionalt1.get();
-        assertTrue(t3.getName().equals(t1Name));
+        TableEntity t1_ = optionalt1.get();
+        assertTrue(t1_.getName().equals(t1Name));
     }
+
 }

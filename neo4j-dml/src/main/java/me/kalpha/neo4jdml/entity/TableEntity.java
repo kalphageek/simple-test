@@ -5,7 +5,7 @@ import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
 @Getter
-@Node("Table")
+@Node("TABLE")
 public class TableEntity {
     @Id
     private String name;

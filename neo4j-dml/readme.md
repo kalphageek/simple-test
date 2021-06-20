@@ -10,10 +10,17 @@
 		</dependency>
 ```
 2. Application
+> Main Class에 추가해야 한다
 ```
 @EnableNeo4jRepositories
 ```
-3. Test코드
+3. application.properties
+```properties
+spring.neo4j.uri=bolt://db.deogi:7687
+spring.data.neo4j.username=neo4j
+spring.data.neo4j.password=******
+```
+4. Test코드
 > QueryEntity에 Relation이 있는 테이블을 assign하고 저장하면서, 자동으로 함께 저장된다. 여기서는 저장된 테이블을 find하고 Test한다. 
 ```java
         String t1Name = "Table1";
@@ -29,7 +36,8 @@
         TableEntity t1_ = optionalt1.get();
         assertTrue(t1_.getName().equals(t1Name));
 ```
-4. query에서 'Table2' 문구를 포함하는 QueryEntity를 찾아서 그 Query에 사용된 전체 테이블을 리턴
+5. cypher query sample
+> query에서 'Table2' 문구를 포함하는 QueryEntity를 찾아서 그 Query에 사용된 전체 테이블을 리턴
 ```
 match (q:QUERY)<-[:FROM]-(t) where q.query contains "Table2" return q,t
 ```

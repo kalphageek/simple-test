@@ -26,8 +26,8 @@ public class RepositoryTest {
         TableEntity t2 = new TableEntity("Table2");
 
         QueryEntity queryEntity = new QueryEntity("select * from Table1, Table2");
-        queryEntity.workWith(t1);
-        queryEntity.workWith(t2);
+        queryEntity.addTable(t1);
+        queryEntity.addTable(t2);
         queryRepository.save(queryEntity);
 
         Optional<TableEntity> optionalt1 = tableRepository.findById(t1Name);

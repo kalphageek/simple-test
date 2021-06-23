@@ -5,6 +5,7 @@ import me.kalpha.neo4jdml.repository.QueryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,12 +30,12 @@ public class QueryServiceImpl implements QueryService {
     }
 
     @Override
-    public List<QueryEntity> findByQueryContains(String query) {
-        return queryRepository.findByQueryContains(query);
+    public Collection<QueryEntity> findQuerieByTable(String name) {
+        return queryRepository.findQueriesByTable(name);
     }
 
     @Override
-    public List<QueryEntity> findByTableName(String name) {
-        return queryRepository.findByFromsName(name);
+    public Collection<QueryEntity> findAllQueries() {
+        return queryRepository.findAll();
     }
 }

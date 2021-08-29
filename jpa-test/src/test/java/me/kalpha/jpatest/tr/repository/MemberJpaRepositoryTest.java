@@ -54,16 +54,16 @@ class MemberJpaRepositoryTest extends BaseControllerTest {
         assertTrue(m1.getId() == member1.getId());
         assertTrue(m1.getId() == member1.getId());
 
-        List<Member> all = memberJpaRepository.findAll();
-        assertTrue(all.size() >= 2);
-
-        long count = memberJpaRepository.count();
-        assertTrue(count >= 2);
-
-        memberJpaRepository.delete(member1);
-        memberJpaRepository.delete(member2);
-
-        long detetedCount = memberJpaRepository.count();
-        assertTrue(count-2 == detetedCount);
+//        List<Member> all = memberJpaRepository.findAll();
+//        assertTrue(all.size() >= 2);
+//
+//        long count = memberJpaRepository.count();
+//        assertTrue(count >= 2);
+//
+//        memberJpaRepository.delete(member1);
+//        memberJpaRepository.delete(member2);
+//
+//        long detetedCount = memberJpaRepository.count();
+//        assertTrue(count-2 == detetedCount);
     }
 }

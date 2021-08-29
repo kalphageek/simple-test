@@ -10,6 +10,14 @@
       - 이는 파일에 직접 접근하는 방식으로 파일에 락이 걸려서 여러곳에서 접속을 못하는 문제가 있음
     - DB파일이 생성된 이후에는 "jdbc:h2:tcp://localhost/~/test" 로 접속
 
+## DTO로 조회하기
+1. Repository 설정
+> 마치 객체를 생성하는 것 처럼 new 오퍼레이션을 사용해야 한다. 이때 Package 패스도 전체를 입력해야 한다.
+```java
+@Query("select new me.kalpha.jpatest.tr.entity.MemberDto(m.id, m.name, t.name) from Member m join m.team t");
+List<MemberDto> findMemberDto();
+```
+
 ## find[]ByUsername
 1. []안에는 아무거나 들어가도 된다.
   - findByUsername 과 findXyzByUsername 은 동일한 의미이다.

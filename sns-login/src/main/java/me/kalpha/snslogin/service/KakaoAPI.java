@@ -124,7 +124,7 @@ public class KakaoAPI {
     }
 
     public void kakaoLogout(String access_Token) {
-        String reqURL = "https://kapi.kakao.com/v1/user/logout";
+        String reqURL = "https://kapi.kakao.com/v1/user/unlink";
         try {
             URL url = new URL(reqURL);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();

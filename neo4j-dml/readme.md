@@ -39,5 +39,20 @@ spring.data.neo4j.password=******
 5. cypher query sample
 > query에서 'Table2' 문구를 포함하는 QueryEntity를 찾아서 그 Query에 사용된 전체 테이블을 리턴
 ```
+//노드 생성
+create (t4:TABLE {name:"Table4"})
+//관계 생성
 match (q:QUERY)<-[:FROM]-(t) where q.query contains "Table2" return q,t
+match (t1:TABLE {name:"Table1"})
+match (t2:TABLE {name:"Table2"})
+match (t3:TABLE {name:"Table3"})
+match (t4:TABLE {name:"Table4"})
+match (q1:QUERY {hashCode:1796840983})
+match (q2:QUERY {hashCode:92834988})
+match (q3:QUERY {hashCode:1796840984})
+create 
+(q2)<-[:FROM]-(t1)
+create 
+(q3)<-[:FROM]-(t1)
+
 ```

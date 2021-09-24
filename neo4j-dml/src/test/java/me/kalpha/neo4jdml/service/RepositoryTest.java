@@ -24,10 +24,12 @@ public class RepositoryTest {
         String t1Name = "Table1";
         TableEntity t1 = new TableEntity(t1Name);
         TableEntity t2 = new TableEntity("Table2");
+        TableEntity t4 = new TableEntity("Table4");
 
-        QueryEntity queryEntity = new QueryEntity("select * from Table1, Table2");
+        QueryEntity queryEntity = new QueryEntity("select * from Table1, Table2, Table4");
         queryEntity.addTable(t1);
         queryEntity.addTable(t2);
+        queryEntity.addTable(t4);
         queryRepository.save(queryEntity);
 
         Optional<TableEntity> optionalt1 = tableRepository.findById(t1Name);

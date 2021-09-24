@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 public interface QueryRepository extends Neo4jRepository<QueryEntity, Integer> {
-    @Query("MATCH (q:QUERY)<-[r:FROM]-(t:TABLE) where t.name =~ $name return q,r,t")
+    @Query("MATCH (q)<-[]-(t {name:'Table1'}), (q)<-[:FROM]-(t2)\n" +
+           "RETURN q.hashCode, q.query")
     Collection<QueryEntity> findQueriesByTable(String name);
 }

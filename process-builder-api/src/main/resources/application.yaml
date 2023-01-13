@@ -1,0 +1,4 @@
+management.endpoints.web.exposure.include: health,metrics,loggers
+
+command:
+  cat: "cat ~/workspace/kalphageek.github.io/_posts"

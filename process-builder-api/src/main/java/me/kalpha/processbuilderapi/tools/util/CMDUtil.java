@@ -3,6 +3,7 @@ package me.kalpha.processbuilderapi.tools.util;
 import lombok.extern.slf4j.Slf4j;
 import me.kalpha.processbuilderapi.common.CMDException;
 import me.kalpha.processbuilderapi.vo.CMDResponse;
+import org.apache.commons.io.IOUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -23,7 +24,7 @@ public class CMDUtil {
         ProcessBuilder builder = new ProcessBuilder();
         builder.directory(new File(homeDirectory));
 
-        byte[] buffer = new byte[1000];
+        byte[] buffer = new byte[1024];
         ByteArrayOutputStream outputStream;
         ByteArrayOutputStream errorStream;
         String body = null;
@@ -43,10 +44,8 @@ public class CMDUtil {
             process = builder.start();
             int temp;
             outputStream = new ByteArrayOutputStream();
+            IOUtils.copy(process.getInputStream(), outputStream);
 
-            while ((temp = process.getInputStream().read(buffer)) != -1) {
-                outputStream.write(buffer, 0, (char)temp);
-            }
             body = new String(outputStream.toByteArray(), codePage);
 
             int exitCode = process.waitFor();
@@ -56,22 +55,19 @@ public class CMDUtil {
             } else {
                 errorStream = new ByteArrayOutputStream();
 
-                while ((temp = process.getErrorStream().read(buffer)) != 1) {
-                    errorStream.write(buffer, 0, (char)temp);
-                }
+                IOUtils.copy(process.getErrorStream(), errorStream);
                 body = new String(errorStream.toByteArray(), codePage);
 
-                throw new CMDException("["+command+"] "+body);
+                throw new CMDException(body);
             }
         } catch (Exception e) {
-            log.error("["+command+"] "+e.toString());
+            log.error(e.toString());
             throw e;
         } finally {
             if (process != null) {
                 try {
                     process.getErrorStream().close();
                     process.getInputStream().close();
-                    process.getOutputStream().close();
                     process.destroy();
                 } catch (Exception ex) {
                     ex.printStackTrace();

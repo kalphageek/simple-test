@@ -1,11 +1,12 @@
 package me.kalpha.processbuilderapi.service;
 
 import me.kalpha.processbuilderapi.common.CMDConfiguration;
+import me.kalpha.processbuilderapi.common.CMDException;
 import me.kalpha.processbuilderapi.tools.util.CMDUtil;
-import me.kalpha.processbuilderapi.vo.CMDResponse;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.Map;
 
 @Service
 public class CMDServiceImpl implements CMDService {
@@ -15,11 +16,11 @@ public class CMDServiceImpl implements CMDService {
         this.cMDConfiguration = cMDConfiguration;
     }
     @Override
-    public CMDResponse cat(String fileName) throws IOException, InterruptedException {
+    public Map<String, String> cat(String fileName) throws IOException, InterruptedException, CMDException {
         return runCommand(cMDConfiguration.getCat()+"/"+fileName);
     }
 
-    private CMDResponse runCommand(String command) throws IOException, InterruptedException {
+    private Map<String, String> runCommand(String command) throws IOException, InterruptedException, CMDException {
         return CMDUtil.command(command);
     }
 }

@@ -34,7 +34,7 @@ class CMDControllerTest {
 
     @DisplayName("파일 없음 에러 테스트")
     @Test
-    public void badCatTest() throws Exception {
+    public void badCatTest트() throws Exception {
         mockMvc.perform(get("/api/cat/{fileName}", "aaa"))
                 .andDo(print())
                 .andExpect(status().isBadRequest())

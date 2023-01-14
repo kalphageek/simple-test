@@ -1,18 +1,21 @@
 package me.kalpha.processbuilderapi.tools.util;
 
 import lombok.extern.slf4j.Slf4j;
+import me.kalpha.processbuilderapi.common.Constants;
 import me.kalpha.processbuilderapi.common.CMDException;
-import me.kalpha.processbuilderapi.vo.CMDResponse;
 import org.apache.commons.io.IOUtils;
+import org.springframework.http.HttpStatus;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 public class CMDUtil {
-    public static CMDResponse command(String command) throws IOException, InterruptedException, CMDException {
-        CMDResponse response = new CMDResponse();
+    public static Map<String, String> command(String command) throws IOException, InterruptedException, CMDException {
+        Map<String, String> map = new HashMap<>();
 
         log.info("Tne command is running [{}]", command);
         String homeDirectory =  System.getProperty("user.home");
@@ -50,15 +53,14 @@ public class CMDUtil {
 
             int exitCode = process.waitFor();
             if (exitCode == 0) {
-               response.setStatus("200");
-               response.setResponseMessage(body);
+                map.put("responseMessage", body);
             } else {
                 errorStream = new ByteArrayOutputStream();
 
                 IOUtils.copy(process.getErrorStream(), errorStream);
                 body = new String(errorStream.toByteArray(), codePage);
 
-                throw new CMDException(body);
+                throw new CMDException(Constants.ExceptionClass.HANDLED, HttpStatus.BAD_REQUEST, body);
             }
         } catch (Exception e) {
             log.error(e.toString());
@@ -75,6 +77,6 @@ public class CMDUtil {
             }
         }
         log.info("The command is finished");
-        return response;
+        return map;
     }
 }

@@ -53,7 +53,7 @@ public class CMDUtil {
 
             int exitCode = process.waitFor();
             if (exitCode == 0) {
-                map.put("responseMessage", body);
+                map.put(Constants.RESPONSE_MESSAGE, body);
             } else {
                 errorStream = new ByteArrayOutputStream();
 

@@ -1,0 +1,13 @@
+datasource:
+  catalog:
+    hikari:
+      driverClassName: org.h2.Driver
+      username: sa
+      password:
+      jdbcUrl: jdbc:h2:tcp://localhost/~/workspace/h2/data/catalog
+  batch:
+    hikari:
+      driverClassName: org.h2.Driver
+      username: sa
+      password:
+      jdbcUrl: jdbc:h2:tcp://localhost/~/workspace/h2/data/local

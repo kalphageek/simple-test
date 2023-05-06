@@ -1,4 +1,4 @@
-package me.kalpha.hikarimultidb.query.service;
+package me.kalpha.hikarimultidb.query.repository;
 
 import me.kalpha.hikarimultidb.config.Constant;
 import org.junit.jupiter.api.DisplayName;

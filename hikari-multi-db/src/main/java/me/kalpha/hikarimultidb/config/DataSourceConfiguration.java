@@ -17,7 +17,7 @@ public class DataSourceConfiguration {
     @Bean(Constant.CATALOG_DATASOURCE)
     @Primary
     @ConfigurationProperties(prefix = "datasource.catalog.hikari")
-    public DataSource dataSource() {
+    public DataSource catalogDataSource() {
         return DataSourceBuilder.create()
                 .type(HikariDataSource.class)
                 .build();
@@ -25,11 +25,11 @@ public class DataSourceConfiguration {
 
     @Bean(Constant.BATCH_DATASOURCE)
     @ConfigurationProperties(prefix = "datasource.batch.hikari")
-    public DataSource readerDataSource() {
-        HikariDataSource hikariDataSource = DataSourceBuilder.create()
+    public DataSource batchDataSource() {
+        HikariDataSource batchDataSource = DataSourceBuilder.create()
                 .type(HikariDataSource.class)
                 .build();
-        hikariDataSource.setReadOnly(true);
-        return hikariDataSource;
+        batchDataSource.setReadOnly(true);
+        return batchDataSource;
     }
 }

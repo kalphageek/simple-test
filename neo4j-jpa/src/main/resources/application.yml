@@ -1,9 +1,9 @@
 spring:
   data:
     neo4j:
-      uri: bolt://db.deogi:7687/
+      uri: bolt://localhost:7687/
       username: neo4j
-      password: 123qwe
+      password: 1234qwer
 
 logging:
   level:

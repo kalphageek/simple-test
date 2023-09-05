@@ -23,7 +23,7 @@ public class TestRunner implements ApplicationRunner {
                 .setName("Query1")
                 .setTag("20230101")
                 .setSystemId("HUBADM")
-                .setQuery(queryString)
+                .setQueryString(queryString)
                 .setTables(Set.of(table1, table2));
 
         queryRepository.save(query);
@@ -36,7 +36,7 @@ public class TestRunner implements ApplicationRunner {
                 .setName("Query2")
                 .setTag("20230101")
                 .setSystemId("HUBADM")
-                .setQuery(queryString)
+                .setQueryString(queryString)
                 .setTables(Set.of(table3, table4));
 
         queryRepository.save(query2);
